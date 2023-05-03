@@ -21,52 +21,52 @@ fn projectUrl(fragment: &str) -> String
 
 pub fn collectProjectData() -> Vec<ProjectData>
 {
-	let ocsm = ProjectData
-	{
-		description: "Open Character Sheet Manager is an open source cross-platform desktop application for conveniently managing TableTop RolePlaying Game character sheets for a wide variety of game systems.".into(),
-		id: "1".into(),
-		label: "OCSM".into(),
-		url: projectUrl("/ocsm"),
-		..Default::default()
-	};
-	
-	let rustVdl = ProjectData
-	{
-		description: "A desktop GUI frontend for yt-dlp written in Rust using Dioxus.".into(),
-		id: "2".into(),
-		label: "rust-vdl".into(),
-		url: projectUrl("/rust-vdl"),
-		..Default::default()
-	};
-	
-	let diceRollerGodot = ProjectData
-	{
-		description: "Exploring 3D physics with C++ and Godot 4 in a literal dice roller application.".into(),
-		id: "3".into(),
-		label: "Dice Roller (Godot)".into(),
-		url: pageUrl("/dice-roller-godot/"),
-		..Default::default()
-	};
-	
-	let github = ProjectData
-	{
-		description: "Take a look at all of my Github projects!".into(),
-		id: "4".into(),
-		label: "Github Profile".into(),
-		url: GithubProfileUrl.to_owned(),
-		..Default::default()
-	};
-	
-	let kofi = ProjectData
-	{
-		description: "Support me on Ko-fi!".into(),
-		id: "5".into(),
-		label: "Ko-fi".into(),
-		url: KofiProfileUrl.to_owned(),
-		..Default::default()
-	};
-	
-	let projects = vec![ocsm, rustVdl, diceRollerGodot, github, kofi];
+	let projects = vec![
+		ProjectData
+		{
+			description: "Open Character Sheet Manager is an open source cross-platform desktop application for conveniently managing TableTop RolePlaying Game character sheets for a wide variety of game systems.".into(),
+			id: "1".into(),
+			label: "OCSM".into(),
+			url: projectUrl("/ocsm"),
+			..Default::default()
+		},
+		
+		ProjectData
+		{
+			description: "A desktop GUI frontend for yt-dlp written in Rust using Dioxus.".into(),
+			id: "2".into(),
+			label: "rust-vdl".into(),
+			url: projectUrl("/rust-vdl"),
+			..Default::default()
+		},
+		
+		ProjectData
+		{
+			description: "Exploring 3D physics with C++ and Godot 4 in a literal dice roller application.".into(),
+			id: "3".into(),
+			label: "Dice Roller (Godot)".into(),
+			url: pageUrl("/dice-roller-godot/"),
+			..Default::default()
+		},
+		
+		ProjectData
+		{
+			description: "See what I'm up to on Github!".into(),
+			id: "4".into(),
+			label: "Github Profile".into(),
+			url: GithubProfileUrl.to_owned(),
+			..Default::default()
+		},
+		
+		ProjectData
+		{
+			description: "Support me on Ko-fi!".into(),
+			id: "5".into(),
+			label: "Ko-fi".into(),
+			url: KofiProfileUrl.to_owned(),
+			..Default::default()
+		},
+	];
 	return projects;
 }
 
