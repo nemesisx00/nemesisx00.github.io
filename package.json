@@ -1,0 +1,14 @@
+{
+  "name": "nemesisx00-github-io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "stylus": "stylus --compress ./stylus/main.styl --out ./assets/main.css"
+  },
+  "author": "Peter Lunneberg",
+  "license": "MIT",
+  "dependencies": {
+    "stylus": "^0.59.0"
+  }
+}

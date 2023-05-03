@@ -1,0 +1,32 @@
+@require "./mixins"
+
+body
+	color whiteOff
+	background-color blueDark
+	margin 0
+	padding 0
+
+a
+	color whiteOff
+	text-decoration none
+	
+	&:visited
+		color whiteOff
+		text-decoration none
+	
+	&:hover
+		color whiteOff
+		text-decoration underline
+
+h1,h2,h3,h4,h5,h6
+	margin 0
+	padding 0
+
+#main
+	flex(column)
+	align-items center
+	overflow-x hidden
+
+@require "./head"
+@require "./projects"
+@require "./media"

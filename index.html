@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Peter Lunneberg - Full Stack Software Developer</title>
+		<meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta charset="UTF-8" />
+		<link rel="stylesheet" href="./main.css" />
+		<script src="./js/scroller.js" defer></script>
+	</head>
+	<body>
+		<div id="main"></div>
+		<script type="module">
+			import init from "./assets/dioxus/nemesisx00-github-io.js"
+			init("./assets/dioxus/nemesisx00-github-io_bg.wasm").then(wasm => {
+				if (wasm.__wbindgen_start == undefined)
+					wasm.main()
+			})
+		</script>
+	</body>
+</html>

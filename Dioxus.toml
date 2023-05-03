@@ -1,0 +1,19 @@
+[application]
+name = "nemesisx00-github-io"
+default_platform = "web"
+out_dir = "web"
+asset_dir = "assets"
+
+[web.app]
+title = "Peter Lunneberg"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "assets"]
+
+[web.resource]
+style = []
+script = []
+
+[web.resource.dev]
+script = []

@@ -1,0 +1,7 @@
+**/*.rs.bk
+.vscode/
+node_modules/
+target/
+web/
+assets/main.css
+Cargo.lock

@@ -1,0 +1,56 @@
+#main #projectListContainer
+	flex(row)
+	align-items center
+	background-color orange
+	justify-content center
+	min-height 400px
+	overflow visible
+	padding 15px 0 20px
+	position relative
+	width 100%
+	
+	& .project
+		flex(column)
+		align-items center
+		background-color blueLight
+		border-radius 25px
+		box-shadow 5px 10px greyTransparent
+		justify-content center
+		height 400px
+		left 13%
+		min-width 74%
+		max-width 74%
+		position absolute
+		transition left 1s ease, box-shadow 1s ease, transform 0.2s ease
+		
+		&:hover
+			transform: scale(1.01)
+			text-decoration none
+		
+		&.show
+			z-index 100
+			
+			&.previous
+				left -62%
+				z-index 10
+				box-shadow -10px 8px greyTransparent
+				
+				&.offscreen
+					left -137%
+					z-index 10
+					box-shadow -25px 5px greyTransparent
+			
+			&.next
+				left 88%
+				z-index 1000
+				box-shadow 15px 12px greyTransparent
+			
+				&.offscreen
+					left 176%
+					z-index 1000
+					box-shadow 25px 15px greyTransparent
+		
+		&:not(.show)
+			hide()
+			left 182%
+			z-index 0
