@@ -7,7 +7,7 @@ pub const HeaderContent: &'static str = r#""#;
 
 pub const GithubPageBaseUrl: &'static str = "https://nemesisx00.github.io";
 pub const GithubProfileUrl: &'static str = "https://github.com/nemesisx00";
-pub const KofiProfileUrl: &'static str = "https://ko-fi.com/U7U1HEKZ9";
+pub const KofiProfileUrl: &'static str = "https://ko-fi.com/peterlunneberg";
 
 fn pageUrl(fragment: &str) -> String
 {
@@ -23,30 +23,34 @@ pub fn collectProjectData() -> Vec<ProjectData>
 {
 	let ocsm = ProjectData
 	{
-		description: "Open Character Sheet Manager".into(),
+		description: "Open Character Sheet Manager is an open source cross-platform desktop application for conveniently managing TableTop RolePlaying Game character sheets for a wide variety of game systems.".into(),
 		id: "1".into(),
 		label: "OCSM".into(),
 		url: projectUrl("/ocsm"),
-	};
-	
-	let diceRollerGodot = ProjectData
-	{
-		id: "2".into(),
-		label: "Dice Roller (Godot)".into(),
-		url: pageUrl("/dice-roller-godot/"),
 		..Default::default()
 	};
 	
 	let rustVdl = ProjectData
 	{
-		id: "3".into(),
+		description: "A desktop GUI frontend for yt-dlp written in Rust using Dioxus.".into(),
+		id: "2".into(),
 		label: "rust-vdl".into(),
 		url: projectUrl("/rust-vdl"),
 		..Default::default()
 	};
 	
+	let diceRollerGodot = ProjectData
+	{
+		description: "Exploring 3D physics with C++ and Godot 4 in a literal dice roller application.".into(),
+		id: "3".into(),
+		label: "Dice Roller (Godot)".into(),
+		url: pageUrl("/dice-roller-godot/"),
+		..Default::default()
+	};
+	
 	let github = ProjectData
 	{
+		description: "I'm just a software developer looking to make a difference in the world via Open Source.".into(),
 		id: "4".into(),
 		label: "Github Profile".into(),
 		url: GithubProfileUrl.to_owned(),
@@ -59,9 +63,10 @@ pub fn collectProjectData() -> Vec<ProjectData>
 		id: "5".into(),
 		label: "Ko-fi".into(),
 		url: KofiProfileUrl.to_owned(),
+		..Default::default()
 	};
 	
-	let projects = vec![ocsm, diceRollerGodot, rustVdl, github, kofi];
+	let projects = vec![ocsm, rustVdl, diceRollerGodot, github, kofi];
 	return projects;
 }
 
