@@ -40,7 +40,7 @@ pub fn PageTitles(cx: Scope) -> Element
 				target: "_blank",
 				title: "Github Profile",
 				
-				img { alt: "Github", src: "./images/github-mark/github-mark-white.svg" }
+				img { alt: "Github", src: "./images/third-party/github-mark/github-mark-white.svg" }
 			}
 			
 			a
@@ -49,7 +49,7 @@ pub fn PageTitles(cx: Scope) -> Element
 				target: "_blank",
 				title: "Support me on Ko-fi!",
 				
-				img { alt: "Ko-fi", src: "" }
+				img { alt: "Ko-fi", src: "./images/third-party/kofi-logo-smol.png" }
 			}
 		}
 	});
