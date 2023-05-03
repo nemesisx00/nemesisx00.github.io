@@ -50,7 +50,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 	
 	let github = ProjectData
 	{
-		description: "I'm just a software developer looking to make a difference in the world via Open Source.".into(),
+		description: "Take a look at all of my Github projects!".into(),
 		id: "4".into(),
 		label: "Github Profile".into(),
 		url: GithubProfileUrl.to_owned(),
