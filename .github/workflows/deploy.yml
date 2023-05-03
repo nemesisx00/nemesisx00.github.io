@@ -24,10 +24,10 @@ jobs:
       - name: Setup
         run: |
           sudo apt-get update
+          curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install -y nodejs
           curl https://sh.rustup.rs -sSf | sh -s -- -y
           rustup target add wasm32-unknown-unknown
           cargo install dioxus-cli
-          curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install -y nodejs
       
       - name: Checkout
         uses: actions/checkout@v3
@@ -43,7 +43,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
           path: '${{github.workspace}}/web'
       
       - name: Deploy to GitHub Pages
