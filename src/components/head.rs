@@ -34,6 +34,7 @@ pub fn PageTitles(cx: Scope) -> Element
 			a
 			{
 				href: "{githubUrl}",
+				target: "_blank",
 				title: "Github Profile",
 				
 				img { alt: "Github", src: "./images/github-mark/github-mark-white.svg" }
@@ -42,6 +43,7 @@ pub fn PageTitles(cx: Scope) -> Element
 			a
 			{
 				href: "{kofiUrl}",
+				target: "_blank",
 				title: "Support me on Ko-fi!",
 				
 				img { alt: "Ko-fi", src: "" }
