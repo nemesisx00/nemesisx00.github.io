@@ -25,6 +25,7 @@ jobs:
         run: |
           sudo apt-get update
           curl https://sh.rustup.rs -sSf | sh -s -- -y
+          rustup target add wasm32-unknown-unknown
           cargo install dioxus-cli
           curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install -y nodejs
       
