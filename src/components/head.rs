@@ -2,7 +2,10 @@
 #![cfg_attr(debug_assertions, allow(dead_code))]
 
 use dioxus::prelude::*;
-use crate::data::{GithubProfileUrl, KofiProfileUrl, HeaderContent, SubtitleContent, TitleContent};
+use crate::data::{
+	GithubProfileUrl, KofiProfileUrl,
+	HeaderContent, SubtitleContent, TitleContent
+};
 
 pub fn PageHeader(cx: Scope) -> Element
 {
