@@ -3,21 +3,14 @@
 
 pub const TitleContent: &'static str = "Peter Lunneberg";
 pub const SubtitleContent: &'static str = "Full Stack Software Developer";
-pub const HeaderContent: &'static str = r#""#;
+pub const HeaderContent: &'static str = r#"🚧 Under Construction 🚧"#;
 
 pub const GithubPageBaseUrl: &'static str = "https://nemesisx00.github.io";
 pub const GithubProfileUrl: &'static str = "https://github.com/nemesisx00";
 pub const KofiProfileUrl: &'static str = "https://ko-fi.com/peterlunneberg";
 
-fn pageUrl(fragment: &str) -> String
-{
-	return format!("{}{fragment}", GithubPageBaseUrl.to_owned());
-}
-
-fn projectUrl(fragment: &str) -> String
-{
-	return format!("{}{fragment}", GithubProfileUrl.to_owned());
-}
+fn pageUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubPageBaseUrl.to_owned()); }
+fn projectUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubProfileUrl.to_owned()); }
 
 pub fn collectProjectData() -> Vec<ProjectData>
 {
@@ -67,6 +60,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 			..Default::default()
 		},
 	];
+	
 	return projects;
 }
 
