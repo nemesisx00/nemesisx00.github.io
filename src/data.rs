@@ -17,6 +17,8 @@ pub fn collectProjectData() -> Vec<ProjectData>
 	let projects = vec![
 		ProjectData
 		{
+			backgroundIsVideo: false,
+			backgroundPath: "./images/ocsm-promo-staggered.png".into(),
 			description: "Open Character Sheet Manager is an open source cross-platform desktop application for conveniently managing TableTop RolePlaying Game character sheets for a wide variety of game systems.".into(),
 			id: "1".into(),
 			label: "OCSM".into(),
@@ -35,6 +37,9 @@ pub fn collectProjectData() -> Vec<ProjectData>
 		
 		ProjectData
 		{
+			backgroundIsVideo: true,
+			backgroundPath: "./images/dice-roller-godot-20sec-loop.webm".into(),
+			backgroundPoster: "./images/dice-roller-godot-poster.png".into(),
 			description: "Exploring 3D physics with C++ and Godot 4 in a literal dice roller application.".into(),
 			id: "3".into(),
 			label: "Dice Roller (Godot)".into(),
@@ -67,6 +72,9 @@ pub fn collectProjectData() -> Vec<ProjectData>
 #[derive(Clone, Debug, Default, PartialEq)]
 pub struct ProjectData
 {
+	pub backgroundIsVideo: bool,
+	pub backgroundPath: String,
+	pub backgroundPoster: String,
 	pub description: String,
 	pub id: String,
 	pub label: String,

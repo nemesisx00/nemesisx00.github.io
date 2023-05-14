@@ -71,6 +71,25 @@ fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<Strin
 			
 			h1 { "{data.label}" }
 			p { "{data.description}" }
+			
+			if data.backgroundIsVideo
+			{
+				rsx!(video
+				{
+					autoplay: true,
+					controls: false,
+					r#loop: true,
+					muted: true,
+					playsinline: true,
+					preload: true,
+					poster: "{data.backgroundPoster}",
+					src: "{data.backgroundPath}"
+				})
+			}
+			else
+			{
+				rsx!(img { src: "{data.backgroundPath}" })
+			}
 		}
 	});
 }
