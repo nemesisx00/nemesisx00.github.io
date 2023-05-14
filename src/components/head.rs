@@ -14,6 +14,7 @@ pub fn PageHeader(cx: Scope) -> Element
 		header
 		{
 			class: "content",
+			
 			"{HeaderContent}"
 		}
 	});
@@ -30,6 +31,7 @@ pub fn PageTitles(cx: Scope) -> Element
 	{
 		h1 { "{TitleContent}" }
 		h4 { "{SubtitleContent}" }
+		
 		h4
 		{
 			id: "socialLinks",
