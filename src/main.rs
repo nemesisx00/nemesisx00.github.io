@@ -5,7 +5,7 @@ mod components;
 mod data;
 
 use dioxus::prelude::*;
-use crate::components::{PageHeader, PageTitles, ProjectList};
+use crate::components::{BodyContent, PageHeader, PageTitles, ProjectList};
 use crate::data::collectProjectData;
 
 fn main()
@@ -27,5 +27,8 @@ fn App(cx: Scope) -> Element
 		PageTitles {}
 		PageHeader {}
 		ProjectList { projects: collectProjectData() }
+		BodyContent {}
+		
+		footer { "© 2023 Peter Lunneberg" }
 	});
 }
