@@ -18,7 +18,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 		ProjectData
 		{
 			backgroundIsVideo: false,
-			backgroundPath: "./images/ocsm-promo-staggered.png".into(),
+			backgroundPath: "./images/ocsm-promo-zoom.png".into(),
 			description: "Open Character Sheet Manager is an open source cross-platform desktop application for conveniently managing TableTop RolePlaying Game character sheets for a wide variety of game systems.".into(),
 			id: "1".into(),
 			label: "OCSM".into(),
