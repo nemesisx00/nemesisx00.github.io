@@ -69,32 +69,37 @@ fn GeneralistPolyglot(cx: Scope) -> Element
 	{
 		section
 		{
-			h1 { "What is a Generalist Polyglot?" }
+			h1 { "What is a Generalist Polyglot Developer?" }
 			
 			p
 			{
-				r#"I refer to myself as an intentional generalist. By this I mean I am
-				practiced in rapidly assimilating new information and learning to use new
-				technologies. In general, I can get up to speed on a completely new-to-me
-				technology, be it a library, framework, or whole programming language,
-				in a day or two at most. And, to be clear, I simply learn to use it,
-				leveraging my more than 15 years of experience learning new things rather
-				than requiring explicit training."#
+				r#"I consider myself to be a polyglot. I'm not referring to my
+				conversational fluency in Norwegian, my having dabbled in 10 or more
+				other spoken languages, nor my ability to read several non-Latin writing
+				systems phonetically."#
 			}
 			
 			p
 			{
-				r#"I also consider myself to be a polyglot. I'm not referring to my
-				conversational fluency in Norwegian, my having dabbled in 10 or more other
-				spoken languages, nor my ability to read several non-Latin writing systems
-				(Greek, Korean Hangul, Japanese kana, Russian and Ukrainian Cyrillic) in
-				spite of not always knowing the meaning behind the words."#
+				r#"A programming language is just that: a language. As I learn a new
+				language, I intuitively bring over understanding from all the other
+				languages I already know, dramatically reducing the time needed to gain
+				fluency."#
 			}
 			
 			p
 			{
-				r#"A programming language is just that: a language. And I am fluent
-				in all of them, even the ones I haven't used before."#
+				r#"This is related to why I refer to myself as an intentional generalist.
+				I am practiced in rapidly assimilating new information and learning to
+				use new technologies. Leveraging my more than 15 years of experience
+				learning new things, as opposed to requiring explicit training, I can get
+				up to speed on a completely new-to-me technology in a day or two, at most."#
+			}
+			
+			p
+			{
+				r#"The result of all of this is that I know I can work with any software
+				development technology regardless of whether or not I've used it before."#
 			}
 		}
 	});
