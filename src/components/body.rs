@@ -83,7 +83,7 @@ fn GeneralistPolyglot(cx: Scope) -> Element
 			{
 				r#"A programming language is just that: a language. As I learn a new
 				language, I intuitively bring over understanding from all the other
-				languages I already know, dramatically reducing the time needed to gain
+				languages I already know, dramatically reducing the time needed to attain
 				fluency."#
 			}
 			
