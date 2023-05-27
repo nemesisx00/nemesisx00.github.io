@@ -1,0 +1,48 @@
+.main
+{
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	min-height: 100vh;
+	padding: 6rem;
+}
+
+.main h1
+{
+	font-size: 3em;
+	margin-bottom: 100px;
+}
+
+.game
+{
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 400px;
+	margin-bottom: 100px;
+}
+
+.game canvas
+{
+	border-radius: 15px;
+	height: 400px;
+	width: 720px;
+}
+
+.attributions
+{
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+}
+
+.attributions a
+{
+	text-decoration: underline;
+	transition: font-size 0.2s;
+}
+.attributions a:hover { font-size: 1.05em; }
+.attributions h2 { margin-bottom: 10px; }
