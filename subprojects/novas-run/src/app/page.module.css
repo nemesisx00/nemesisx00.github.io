@@ -3,15 +3,21 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-start;
+	justify-content: space-evenly;
 	min-height: 100vh;
-	padding: 6rem;
 }
 
-.main h1
+.main > h1
 {
+	flex-grow: 0.25;
 	font-size: 3em;
-	margin-bottom: 100px;
+	margin-top: 50px;
+}
+
+.description
+{
+	text-align: justify;
+	width: 650px;
 }
 
 .game
@@ -19,9 +25,9 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
+	flex-grow: 0.5;
 	justify-content: center;
 	min-height: 400px;
-	margin-bottom: 100px;
 }
 
 .game canvas
@@ -31,13 +37,19 @@
 	width: 720px;
 }
 
-@media screen and (max-width: 720px)
+.gameControls
 {
-	.game canvas
-	{
-		height: 400px;
-		width: 400px;
-	}
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	margin-top: 10px;
+	width: 720px;
+}
+
+.gameControls span label
+{
+	color: #999;
 }
 
 .attributions
@@ -45,6 +57,7 @@
 	align-items: center;
 	display: flex;
 	flex-direction: column;
+	flex-grow: 1;
 	justify-content: flex-start;
 }
 
@@ -55,3 +68,47 @@
 }
 .attributions a:hover { font-size: 1.05em; }
 .attributions h2 { margin-bottom: 10px; }
+.attributions li { list-style: none; }
+
+.footer
+{
+	background-color: rgba(50, 50, 50, 0.5);
+	display: flex;
+	flex-direction: row;
+	font-size: 0.8em;
+	justify-content: center;
+	line-height: 20px;
+	margin-top: 50px;
+	min-height: 20px;
+	width: 100%;
+}
+
+@media screen and (max-width: 720px)
+{
+	.main > h1
+	{
+		font-size: 2.5em;
+		margin-top: 15px;
+	}
+	
+	.description
+	{
+		flex-grow: 1;
+		margin-top: 15px;
+		width: 375px;
+	}
+	
+	.game
+	{
+		flex-grow: 1;
+		margin: 15px 0;
+	}
+	
+	.game canvas { width: 400px; }
+	
+	.gameControls
+	{
+		font-size: 0.8em;
+		width: 400px;
+	}
+}
