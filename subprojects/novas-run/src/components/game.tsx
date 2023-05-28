@@ -16,14 +16,24 @@ let moveDirection: boolean = true
 
 export function Game()
 {
-	global?.window?.addEventListener('keydown', e => controller.handleKeyInput(e))
-	global?.window?.addEventListener('keyup', e => controller.handleKeyInput(e))
-	
 	const canvasRef = useRef<HTMLCanvasElement>(null)
+	const canvasHeight = canvasProps.size.y
+	const [canvasWidth, setCanvasWidth] = useState(canvasProps.size.x)
 	const [spriteSheetLeft, setSpriteSheetLeft] = useState<PlayerSpriteSheet|null>(null)
 	const [spriteSheetRight, setSpriteSheetRight] = useState<PlayerSpriteSheet|null>(null)
 	
+	//Detect and handle viewport resize
 	useEffect(() => {
+		setCanvasWidth(
+			global?.window?.innerWidth < 721
+				? 400
+				: canvasProps.size.x
+		)
+	})
+	
+	//Start the Game Loop
+	useEffect(() => {
+		let gameLoopInterval: NodeJS.Timer | null = null
 		if(canvasRef.current)
 		{
 			const context = canvasRef.current.getContext(canvasProps.contextName) as CanvasRenderingContext2D
@@ -35,26 +45,42 @@ export function Game()
 			
 			if(spriteSheetLeft && spriteSheetRight)
 			{
-				setInterval(() => {
-					delta += intervalDelay
-					sitDelta += intervalDelay
-					
-					processGameLogic()
-					render(context, spriteSheetLeft, spriteSheetRight)
-				}, intervalDelay)
+				if(!gameLoopInterval)
+				{
+					gameLoopInterval = setInterval(() => {
+						delta += intervalDelay
+						sitDelta += intervalDelay
+						
+						processGameLogic(canvasHeight, canvasWidth)
+						render(context, spriteSheetLeft, spriteSheetRight)
+					}, intervalDelay)
+				}
 			}
+		}
+		
+		const handleKeyInput = (e: KeyboardEvent) => controller.handleKeyInput(e)
+		
+		global?.window?.addEventListener('keydown', handleKeyInput)
+		global?.window?.addEventListener('keyup', handleKeyInput)
+		
+		return () => {
+			if(gameLoopInterval)
+				clearInterval(gameLoopInterval)
+			
+			global?.window?.removeEventListener('keydown', handleKeyInput)
+			global?.window?.removeEventListener('keyup', handleKeyInput)
 		}
 	})
 	
 	return (
-		<canvas height={canvasProps.size.y} id={canvasProps.id} ref={canvasRef} width={canvasProps.size.x} />
+		<canvas height={canvasHeight} id={canvasProps.id} ref={canvasRef} width={canvasWidth} />
 	)
 }
 
-function processGameLogic()
+function processGameLogic(height: number, width: number)
 {
 	handleMovementInput()
-	processVelocity()
+	processVelocity(height, width)
 }
 
 function handleMovementInput()
@@ -81,7 +107,7 @@ function handleMovementInput()
 	}
 }
 
-function processVelocity()
+function processVelocity(height: number, width: number)
 {
 	player.velocity.y += canvasProps.gravity
 	
@@ -92,18 +118,18 @@ function processVelocity()
 	player.velocity.y *= canvasProps.friction.y
 	
 	//Is on floor?
-	if(player.position.y > canvasProps.size.y - (player.height * 2) + 1)
+	if(player.position.y > height - (player.height * 2) + 1)
 	{
 		player.isJumping = false
-		player.position.y = canvasProps.size.y - (player.height * 2) + 1
+		player.position.y = height - (player.height * 2) + 1
 		player.velocity.y = 0
 	}
 	
 	//Wrap around
 	let wrapWidth = player.width * canvasProps.wrapFactor
 	if(player.position.x < -wrapWidth)
-		player.position.x = canvasProps.size.x - wrapWidth
-	else if(player.position.x > canvasProps.size.x - wrapWidth)
+		player.position.x = width - wrapWidth
+	else if(player.position.x > width - wrapWidth)
 		player.position.x = -wrapWidth
 }
 

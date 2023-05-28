@@ -31,6 +31,15 @@
 	width: 720px;
 }
 
+@media screen and (max-width: 720px)
+{
+	.game canvas
+	{
+		height: 400px;
+		width: 400px;
+	}
+}
+
 .attributions
 {
 	align-items: center;
