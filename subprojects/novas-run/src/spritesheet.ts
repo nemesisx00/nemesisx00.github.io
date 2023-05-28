@@ -1,4 +1,3 @@
-
 import {BoxData, Vector2} from '@/types'
 
 export const PlayerSpritePathLeft: string = './assets/playersprite_1.png'

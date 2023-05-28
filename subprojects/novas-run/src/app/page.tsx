@@ -1,7 +1,7 @@
 'use client'
 
 import styles from './page.module.css'
-import {Game} from '@/components/game'
+import Game from '@/components/game'
 
 export default function Home()
 {

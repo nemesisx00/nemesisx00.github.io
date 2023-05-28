@@ -36,6 +36,10 @@ export class CanvasProperties
 export class Player
 {
 	crouchSpeed: number
+	directionMove: boolean
+	directionSitFrame: boolean
+	frameDelta: number
+	frameDeltaSit: number
 	height: number
 	isCrouching: boolean
 	isIdle: boolean
@@ -51,6 +55,10 @@ export class Player
 	constructor(startingPosition?: Vector2)
 	{
 		this.crouchSpeed = 0.1
+		this.directionMove = true
+		this.directionSitFrame = true
+		this.frameDelta = 0
+		this.frameDeltaSit = 0
 		this.height = 16
 		this.isCrouching = false
 		this.isIdle = false
