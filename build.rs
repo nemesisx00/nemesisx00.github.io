@@ -24,9 +24,10 @@ fn main()
 		.output()
 		.expect("Failed to build Nova's Run");
 	
-	//Just always re-run this script
+	//Rebuild on Stylus update
 	println!("cargo:rerun-if-changed=stylus/**/*.styl");
 	
+	//Rebuild on Nova's Run update
 	["public/**/*.*", "src/**/*.*", "next.config.js", "package.json", "tsconfig.json"]
 		.map(|frag| println!("cargo:rerun-if-changed=subprojects/novas-run/{}", frag));
 }
