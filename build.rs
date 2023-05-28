@@ -22,7 +22,7 @@ fn main()
 	Command::new(program)
 		.args(&[firstArg, "npm run build --prefix ./subprojects/novas-run"])
 		.output()
-		.expect("Failed to build subproject");
+		.expect("Failed to build Nova's Run");
 	
 	//Just always re-run this script
 	println!("cargo:rerun-if-changed=stylus/**/*.styl");
