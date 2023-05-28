@@ -2,7 +2,17 @@
 
 import React, { useRef, useEffect, useState } from 'react'
 import {CanvasProperties, Player, PlayerController, Vector2} from '@/types'
-import {PlayerSpritePath, PlayerSpriteSheet} from '@/spritesheet'
+import {PlayerSpritePathLeft, PlayerSpritePathRight, PlayerSpriteSheet} from '@/spritesheet'
+
+const controller = new PlayerController()
+const canvasProps = new CanvasProperties('gameCanvas')
+const intervalDelay: number = 1000 / 60
+const player = new Player(new Vector2(200, 175))
+
+let delta: number = 0
+let sitDelta: number = 0
+let sitFrameDirection: boolean = true
+let moveDirection: boolean = true
 
 export function Game()
 {
@@ -10,25 +20,28 @@ export function Game()
 	global?.window?.addEventListener('keyup', e => controller.handleKeyInput(e))
 	
 	const canvasRef = useRef<HTMLCanvasElement>(null)
-	const [spriteSheet, setSpriteSheet] = useState<PlayerSpriteSheet|null>(null)
+	const [spriteSheetLeft, setSpriteSheetLeft] = useState<PlayerSpriteSheet|null>(null)
+	const [spriteSheetRight, setSpriteSheetRight] = useState<PlayerSpriteSheet|null>(null)
 	
 	useEffect(() => {
 		if(canvasRef.current)
 		{
 			const context = canvasRef.current.getContext(canvasProps.contextName) as CanvasRenderingContext2D
 			
-			if(!spriteSheet)
-				setSpriteSheet(new PlayerSpriteSheet(PlayerSpritePath, 16, 16))
+			if(!spriteSheetLeft)
+				setSpriteSheetLeft(new PlayerSpriteSheet(PlayerSpritePathLeft, 16, 16, false))
+			if(!spriteSheetRight)
+				setSpriteSheetRight(new PlayerSpriteSheet(PlayerSpritePathRight, 16, 16))
 			
-			if(spriteSheet)
+			if(spriteSheetLeft && spriteSheetRight)
 			{
 				setInterval(() => {
-					delta += IntervalDelay
-					sitDelta += IntervalDelay
+					delta += intervalDelay
+					sitDelta += intervalDelay
 					
 					processGameLogic()
-					render(context, spriteSheet)
-				}, IntervalDelay)
+					render(context, spriteSheetLeft, spriteSheetRight)
+				}, intervalDelay)
 			}
 		}
 	})
@@ -36,70 +49,6 @@ export function Game()
 	return (
 		<canvas height={canvasProps.size.y} id={canvasProps.id} ref={canvasRef} width={canvasProps.size.x} />
 	)
-}
-
-let delta: number = 0
-let sitDelta: number = 0
-let sitFrameDirection: boolean = true
-let moveDirection: boolean = true
-
-const IntervalDelay: number = 1000 / 60
-
-const canvasProps: CanvasProperties = {
-	contextName: '2d',
-	gravity: 1,
-	friction: { x: 0.9, y: 0.9 },
-	id: 'gameCanvas',
-	size: { x: 720, y: 400 },
-	wrapFactor: 0.625,
-}
-
-const player: Player = {
-	crouchSpeed: 0.1,
-	height: 16,
-	isCrouching: false,
-	isIdle: false,
-	isJumping: true,
-	isMoving: false,
-	isSitting: false,
-	jumpImpulse: 25,
-	position: { x: 200, y: 175 },
-	velocity: { x: 0, y: 0 },
-	speed: 0.5,
-	width: 16,
-}
-
-const controller: PlayerController = {
-	down: false,
-	left: false,
-	right: false,
-	up: false,
-	
-	handleKeyInput: (event: KeyboardEvent) => {
-		let pressed = event.type == 'keydown'
-		switch(event.key)
-		{
-			case 'a':
-			case 'ArrowLeft':
-				controller.left = pressed
-				break
-			
-			case 'd':
-			case 'ArrowRight':
-				controller.right = pressed
-				break
-			
-			case 's':
-			case 'ArrowDown':
-				controller.down = pressed
-				break
-			
-			case 'w':
-			case 'ArrowUp':
-				controller.up = pressed
-				break
-		}
-	}
 }
 
 function processGameLogic()
@@ -158,43 +107,46 @@ function processVelocity()
 		player.position.x = -wrapWidth
 }
 
-function render(context: CanvasRenderingContext2D, spriteSheet: PlayerSpriteSheet)
+function render(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet)
 {
 	context.fillStyle = "#003A47"
 	context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 	
 	renderGround(context)
-	renderPlayer(context, spriteSheet)
+	renderPlayer(context, spriteSheetLeft, spriteSheetRight)
 }
 
-function renderPlayer(context: CanvasRenderingContext2D, spriteSheet: PlayerSpriteSheet)
+function renderPlayer(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet)
 {
 	let animation = getAnimation()
-	let frame = getNextFrameIndex(spriteSheet.frame)
+	let frame = getNextFrameIndex(moveDirection ? spriteSheetRight.frame : spriteSheetLeft.frame)
 	
-	if(sitDelta >= 3000 && frame >= 3)
+	if(!player.isMoving && !player.isJumping && !player.isCrouching && sitDelta >= 3000 && frame >= 3)
 		player.isSitting = true
 	if(player.isMoving)
 		player.isSitting = false
 	
-	spriteSheet.drawFrame(context, animation, frame, player.position, { x: player.width, y: player.height })
+	if(!moveDirection)
+		spriteSheetLeft.drawFrame(context, animation, frame, player.position, { x: player.width, y: player.height })
+	else
+		spriteSheetRight.drawFrame(context, animation, frame, player.position, { x: player.width, y: player.height })
 }
 
 function getAnimation()
 {
 	let animation = 'idle'
 	
-	if(player.isMoving)
+	if(player.isJumping || player.isCrouching || player.isMoving)
 	{
 		sitDelta = 0
 		
-		if(player.isCrouching)
+		if(player.isJumping)
+			animation = 'jump'
+		else if(player.isCrouching)
 			animation = 'sneak'
-		else
+		else if(player.isMoving)
 			animation = 'run'
 	}
-	else if(player.isCrouching)
-		animation = 'sneak'
 	else if(sitDelta >= 3000)
 	{
 		if(player.isSitting)
@@ -211,29 +163,58 @@ function getNextFrameIndex(currentFrame: number)
 	let frame = currentFrame
 	if((player.isMoving && !player.isCrouching && delta >= 100) || delta >= 300)
 	{
-		if(player.isSitting)
+		if(moveDirection)
 		{
-			if(frame <= 3)
+			if(player.isSitting)
 			{
-				frame = 3
-				sitFrameDirection = true
+				if(frame <= 3)
+				{
+					frame = 3
+					sitFrameDirection = true
+				}
+				
+				if(frame >= 6)
+					sitFrameDirection = false
 			}
 			
-			if(frame >= 6)
-				sitFrameDirection = false
+			let prevFrame = frame
+			if(player.isSitting && !sitFrameDirection)
+				frame--
+			else
+				frame++
+			
+			if(player.isCrouching && !player.isMoving)
+				frame = prevFrame
 		}
-		
-		let prevFrame = frame
-		if(player.isSitting && !sitFrameDirection)
-			frame -= 1
 		else
-			frame += 1
-		
-		if(player.isCrouching && !player.isMoving)
-			frame = prevFrame
+		{
+			if(player.isSitting)
+			{
+				if(frame >= 4)
+				{
+					frame = 4
+					sitFrameDirection = true
+				}
+				
+				if(frame <= 1)
+					sitFrameDirection = false
+			}
+			
+			let prevFrame = frame
+			if(player.isSitting && !sitFrameDirection)
+				frame++
+			else
+				frame--
+			
+			if(player.isCrouching && !player.isMoving)
+				frame = prevFrame
+		}
 		
 		delta = 0
 	}
+	
+	if(player.isJumping)
+		frame = moveDirection ? 7 : 0
 	
 	return frame
 }
