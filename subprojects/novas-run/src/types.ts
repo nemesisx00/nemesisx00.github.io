@@ -35,7 +35,6 @@ export class CanvasProperties
 
 export class Player
 {
-	crouchSpeed: number
 	directionMove: boolean
 	directionSitFrame: boolean
 	frameDelta: number
@@ -46,15 +45,17 @@ export class Player
 	isJumping: boolean
 	isMoving: boolean
 	isSitting: boolean
+	isSprinting: boolean
 	jumpImpulse: number
 	position: Vector2
 	velocity: Vector2
 	speed: number
+	speedCrouch: number
+	speedSprint: number
 	width: number
 	
 	constructor(startingPosition?: Vector2)
 	{
-		this.crouchSpeed = 0.1
 		this.directionMove = true
 		this.directionSitFrame = true
 		this.frameDelta = 0
@@ -65,10 +66,13 @@ export class Player
 		this.isJumping = true
 		this.isMoving = false
 		this.isSitting = false
+		this.isSprinting = false
 		this.jumpImpulse = 25
 		this.position = startingPosition ? startingPosition : { x: 0, y: 0 }
 		this.velocity = { x: 0, y: 0 }
-		this.speed = 0.5
+		this.speed = 0.1
+		this.speedCrouch = 0.05
+		this.speedSprint = 0.5
 		this.width = 16
 	}
 }
@@ -79,6 +83,7 @@ export class PlayerController
 	left: boolean = false
 	right: boolean = false
 	up: boolean = false
+	sprint: boolean = false
 	
 	constructor() {}
 	
@@ -100,6 +105,11 @@ export class PlayerController
 			case 's':
 			case 'ArrowDown':
 				this.down = pressed
+				break
+			
+			case 'v':
+			case '0':
+				this.sprint = pressed
 				break
 			
 			case 'w':

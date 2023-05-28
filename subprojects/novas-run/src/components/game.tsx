@@ -2,9 +2,9 @@
 
 import React, { useRef, useEffect, useState } from 'react'
 import processGameLogic from '@/gameLogic'
-import render from '@/gameRenderer'
+import renderGame from '@/gameRenderer'
 import { CanvasProperties, Player, PlayerController, Vector2 } from '@/types'
-import { PlayerSpritePathLeft, PlayerSpritePathRight, PlayerSpriteSheet } from '@/spritesheet'
+import PlayerSpriteSheet, { PlayerSpritePathLeft, PlayerSpritePathRight } from '@/spritesheet'
 
 const controller = new PlayerController()
 const canvasProps = new CanvasProperties('gameCanvas')
@@ -49,7 +49,7 @@ export default function Game()
 						player.frameDeltaSit += intervalDelay
 						
 						processGameLogic(player, controller, canvasProps, canvasHeight, canvasWidth)
-						render(context, spriteSheetLeft, spriteSheetRight, player)
+						renderGame(context, spriteSheetLeft, spriteSheetRight, player)
 					}, intervalDelay)
 				}
 			}

@@ -3,7 +3,7 @@ import {BoxData, Vector2} from '@/types'
 export const PlayerSpritePathLeft: string = './assets/playersprite_1.png'
 export const PlayerSpritePathRight: string = './assets/playersprite_0.png'
 
-export class PlayerSpriteSheet
+export default class PlayerSpriteSheet
 {
 	leftToRight: boolean
 	frame: number

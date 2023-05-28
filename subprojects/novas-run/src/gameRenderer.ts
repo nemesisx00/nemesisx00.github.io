@@ -1,7 +1,7 @@
 import { Player } from "@/types"
-import { PlayerSpriteSheet } from "@/spritesheet"
+import PlayerSpriteSheet from "@/spritesheet"
 
-export default function render(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player)
+export default function renderGame(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player)
 {
 	context.fillStyle = "#003A47"
 	context.fillRect(0, 0, context.canvas.width, context.canvas.height)
@@ -30,7 +30,7 @@ function getAnimation(player: Player)
 {
 	let animation = 'idle'
 	
-	if(player.isJumping || player.isCrouching || player.isMoving)
+	if(player.isJumping || player.isCrouching || player.isSprinting || player.isMoving)
 	{
 		player.frameDeltaSit = 0
 		
@@ -38,8 +38,10 @@ function getAnimation(player: Player)
 			animation = 'jump'
 		else if(player.isCrouching)
 			animation = 'sneak'
-		else if(player.isMoving)
+		else if(player.isSprinting)
 			animation = 'run'
+		else if(player.isMoving)
+			animation = 'walk'
 	}
 	else if(player.frameDeltaSit >= 3000)
 	{
@@ -55,7 +57,17 @@ function getAnimation(player: Player)
 function getNextFrameIndex(currentFrame: number, player: Player)
 {
 	let frame = currentFrame
-	if((player.isMoving && !player.isCrouching && player.frameDelta >= 100) || player.frameDelta >= 300)
+	if(
+		(
+			player.isMoving
+			&& (
+				(player.isCrouching && !player.isSprinting && player.frameDelta >= 300)
+				|| (!player.isCrouching && player.isSprinting && player.frameDelta >= 100)
+				|| player.frameDelta >= 175
+			)
+		)
+		|| player.frameDelta >= 300
+	)
 	{
 		if(player.directionMove)
 		{

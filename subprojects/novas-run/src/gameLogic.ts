@@ -8,9 +8,6 @@ export default function processGameLogic(player: Player, controller: PlayerContr
 
 function handleMovementInput(player: Player, controller: PlayerController)
 {
-	player.isCrouching = controller.down
-	player.isMoving = controller.left || controller.right
-	
 	if(controller.up && !player.isJumping)
 	{
 		player.velocity.y -= player.jumpImpulse
@@ -19,15 +16,31 @@ function handleMovementInput(player: Player, controller: PlayerController)
 	
 	if(controller.left)
 	{
-		player.velocity.x -= player.isCrouching ? player.crouchSpeed : player.speed
-		player.directionMove = false
+		player.velocity.x -= player.isCrouching
+								? player.speedCrouch
+								: player.isSprinting
+									? player.speedSprint
+									: player.speed
+		
+		if(!controller.right)
+			player.directionMove = false
 	}
 	
 	if(controller.right)
 	{
-		player.velocity.x += player.isCrouching ? player.crouchSpeed : player.speed
-		player.directionMove = true
+		player.velocity.x += player.isCrouching
+								? player.speedCrouch
+								: player.isSprinting
+									? player.speedSprint
+									: player.speed
+		
+		if(!controller.left)
+			player.directionMove = true
 	}
+	
+	player.isCrouching = controller.down
+	player.isMoving = controller.left != controller.right
+	player.isSprinting = controller.sprint
 }
 
 function processVelocity(player: Player, canvasProps: CanvasProperties, height: number, width: number)
