@@ -60,6 +60,7 @@ export default function Game()
 		global?.window?.addEventListener('keydown', handleKeyInput)
 		global?.window?.addEventListener('keyup', handleKeyInput)
 		
+		//Clean up on component unmount
 		return () => {
 			if(gameLoopInterval)
 				clearInterval(gameLoopInterval)
