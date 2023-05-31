@@ -32,6 +32,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
+      - name: Setup Subprojects
+        run: |
+          npm install --prefix ./subprojects/novas-run
+      
       - name: Build
         run: |
           npm install
