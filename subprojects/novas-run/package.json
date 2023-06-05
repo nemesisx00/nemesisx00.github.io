@@ -3,15 +3,18 @@
 	"version": "0.1.0",
 	"private": true,
 	"scripts": {
+		"build": "npm install & npm run nextbuild",
 		"dev": "next dev",
-		"build": "next build",
-		"start": "next start",
-		"lint": "next lint"
+		"lint": "next lint",
+		"nextbuild": "next build",
+		"start": "next start"
 	},
 	"dependencies": {
 		"@types/node": "^20.2.1",
 		"@types/react": "^18.2.6",
+		"nemesisx00-github-io": "file:../..",
 		"next": "^13.4.3",
+		"novas-run": "file:",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"typescript": "^5.0.4"
