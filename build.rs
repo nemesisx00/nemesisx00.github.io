@@ -7,7 +7,7 @@ fn main()
 	let mut program = "cmd";
 	let mut firstArg = "/C";
 	
-	if !cfg!(target_os = "windows")
+	if !cfg!(windows)
 	{
 		program = "sh";
 		firstArg = "-c";
@@ -17,7 +17,6 @@ fn main()
 		.args(&[firstArg, "npm run build"])
 		.output()
 		.expect("Failed to execute Stylus script");
-	
 	
 	Command::new(program)
 		.args(&[firstArg, "npm run build --prefix ./subprojects/novas-run"])
