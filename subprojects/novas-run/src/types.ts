@@ -61,6 +61,7 @@ export class Platform
 
 export class Player
 {
+	canJump: boolean
 	directionMove: boolean
 	directionSitFrame: boolean
 	frameDelta: number
@@ -72,7 +73,7 @@ export class Player
 	isMoving: boolean
 	isSitting: boolean
 	isSprinting: boolean
-	jumpCooldown: number
+	jumpDelta: number
 	jumpImpulse: number
 	position: Vector2
 	velocity: Vector2
@@ -83,6 +84,7 @@ export class Player
 	
 	constructor(startingPosition?: Vector2)
 	{
+		this.canJump = true
 		this.directionMove = true
 		this.directionSitFrame = true
 		this.frameDelta = 0
@@ -94,7 +96,7 @@ export class Player
 		this.isMoving = false
 		this.isSitting = false
 		this.isSprinting = false
-		this.jumpCooldown = 0.25
+		this.jumpDelta = 0
 		this.jumpImpulse = 25
 		this.position = startingPosition ? startingPosition : { x: 0, y: 0 }
 		this.velocity = { x: 0, y: 0 }

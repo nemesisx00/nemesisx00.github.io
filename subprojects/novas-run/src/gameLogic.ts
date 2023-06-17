@@ -8,10 +8,15 @@ export default function processGameLogic(player: Player, controller: PlayerContr
 
 function handleMovementInput(player: Player, controller: PlayerController)
 {
-	if(controller.up && !player.isJumping)
+	if(controller.up)
 	{
-		player.velocity.y -= player.jumpImpulse
-		player.isJumping = true
+		if(player.canJump && !player.isJumping)
+		{
+			player.canJump = false
+			player.jumpDelta = 0
+			player.isJumping = true
+			player.velocity.y -= player.jumpImpulse
+		}
 	}
 	
 	if(controller.left)
@@ -45,6 +50,9 @@ function handleMovementInput(player: Player, controller: PlayerController)
 
 function processVelocity(player: Player, canvasProps: CanvasProperties, height: number, width: number, platforms?: Platform[])
 {
+	let halfPlayerHeight = player.height / 2
+	let groundY = height - (player.height * 2) + 1;
+	
 	player.velocity.y += canvasProps.gravity
 	
 	player.position.x += player.velocity.x
@@ -53,14 +61,11 @@ function processVelocity(player: Player, canvasProps: CanvasProperties, height: 
 	player.velocity.x *= canvasProps.friction.x
 	player.velocity.y *= canvasProps.friction.y
 	
-	let doublePlayerHeight = player.height * 2
-	let halfPlayerHeight = player.height / 2
-	
 	//Is on floor?
-	if(player.position.y > height - doublePlayerHeight + 1)
+	if(player.position.y > groundY)
 	{
 		player.isJumping = false
-		player.position.y = height - doublePlayerHeight + 1
+		player.position.y = groundY
 		player.velocity.y = 0
 	}
 	

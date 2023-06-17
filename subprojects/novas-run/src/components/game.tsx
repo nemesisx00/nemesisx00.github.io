@@ -10,6 +10,7 @@ const controller = new PlayerController()
 const canvasProps = new CanvasProperties('gameCanvas')
 const intervalDelay: number = 1000 / 60
 const player = new Player(new Vector2(273, 100))
+const jumpRate = intervalDelay * 30
 
 const platforms = [
 	new Platform(new Vector2(50, 300), new Vector2(150, 300), "#333"),
@@ -53,6 +54,10 @@ export default function Game()
 					gameLoopInterval = setInterval(() => {
 						player.frameDelta += intervalDelay
 						player.frameDeltaSit += intervalDelay
+						player.jumpDelta += intervalDelay
+						
+						if(player.jumpDelta >= jumpRate)
+							player.canJump = true
 						
 						processGameLogic(player, controller, canvasProps, canvasHeight, canvasWidth, platforms)
 						renderGame(context, spriteSheetLeft, spriteSheetRight, player, platforms)
