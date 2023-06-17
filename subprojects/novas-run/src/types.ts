@@ -33,6 +33,22 @@ export class CanvasProperties
 	}
 }
 
+export class Platform
+{
+	color: string | CanvasGradient | CanvasPattern
+	end: Vector2
+	start: Vector2
+	width: number
+	
+	constructor(start?: Vector2, end?: Vector2, color: string | CanvasGradient | CanvasPattern = "#333", width: number = 16)
+	{
+		this.color = color
+		this.end = end ? end : new Vector2()
+		this.start = start ? start : new Vector2()
+		this.width = width
+	}
+}
+
 export class Player
 {
 	directionMove: boolean
@@ -46,6 +62,7 @@ export class Player
 	isMoving: boolean
 	isSitting: boolean
 	isSprinting: boolean
+	jumpCooldown: number
 	jumpImpulse: number
 	position: Vector2
 	velocity: Vector2
@@ -67,6 +84,7 @@ export class Player
 		this.isMoving = false
 		this.isSitting = false
 		this.isSprinting = false
+		this.jumpCooldown = 0.25
 		this.jumpImpulse = 25
 		this.position = startingPosition ? startingPosition : { x: 0, y: 0 }
 		this.velocity = { x: 0, y: 0 }
@@ -116,6 +134,35 @@ export class PlayerController
 			case 'ArrowUp':
 				this.up = pressed
 				break
+		}
+	}
+}
+
+export class Sprite
+{
+	image?: HTMLImageElement
+	transform: BoxData
+	
+	constructor(image?: HTMLImageElement, transform?: BoxData)
+	{
+		this.transform = transform
+					? transform
+					: new BoxData()
+		
+		this.image = image
+					? image
+					: undefined
+	}
+	
+	draw(context: CanvasRenderingContext2D)
+	{
+		if(this.image)
+		{
+			context.drawImage(
+				this.image,
+				0, 0, this.transform.width, this.transform.height,
+				this.transform.origin.x, this.transform.origin.y, this.transform.origin.x + this.transform.width, this.transform.origin.y + this.transform.height
+			)
 		}
 	}
 }

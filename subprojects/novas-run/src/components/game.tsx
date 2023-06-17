@@ -3,13 +3,18 @@
 import React, { useRef, useEffect, useState } from 'react'
 import processGameLogic from '@/gameLogic'
 import renderGame from '@/gameRenderer'
-import { CanvasProperties, Player, PlayerController, Vector2 } from '@/types'
+import { BoxData, CanvasProperties, Platform, Player, PlayerController, Sprite, Vector2 } from '@/types'
 import PlayerSpriteSheet, { PlayerSpritePathLeft, PlayerSpritePathRight } from '@/spritesheet'
 
 const controller = new PlayerController()
 const canvasProps = new CanvasProperties('gameCanvas')
 const intervalDelay: number = 1000 / 60
 const player = new Player(new Vector2(200, 175))
+
+const platforms = [
+	new Platform(new Vector2(50, 300), new Vector2(150, 300)),
+	new Platform(new Vector2(200, 250), new Vector2(250, 250))
+]
 
 export default function Game()
 {
@@ -48,8 +53,8 @@ export default function Game()
 						player.frameDelta += intervalDelay
 						player.frameDeltaSit += intervalDelay
 						
-						processGameLogic(player, controller, canvasProps, canvasHeight, canvasWidth)
-						renderGame(context, spriteSheetLeft, spriteSheetRight, player)
+						processGameLogic(player, controller, canvasProps, canvasHeight, canvasWidth, platforms)
+						renderGame(context, spriteSheetLeft, spriteSheetRight, player, platforms)
 					}, intervalDelay)
 				}
 			}

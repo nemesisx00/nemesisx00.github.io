@@ -1,12 +1,12 @@
-import { Player } from "@/types"
+import { BoxData, Platform, Player, Sprite, Vector2 } from "@/types"
 import PlayerSpriteSheet from "@/spritesheet"
 
-export default function renderGame(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player)
+export default function renderGame(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player, platforms?: Platform[], sprites?: Sprite[])
 {
 	context.fillStyle = "#003A47"
 	context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 	
-	renderGround(context, player)
+	renderGround(context, player, platforms, sprites)
 	renderPlayer(context, spriteSheetLeft, spriteSheetRight, player)
 }
 
@@ -125,25 +125,42 @@ function getNextFrameIndex(currentFrame: number, player: Player)
 	return frame
 }
 
-function renderGround(context: CanvasRenderingContext2D, player: Player)
+function renderGround(context: CanvasRenderingContext2D, player: Player, platforms?: Platform[], sprites?: Sprite[])
 {
 	const groundLevel = context.canvas.height - (player.height / 2)
 	
-	context.strokeStyle = "#004308"
-	context.lineWidth = player.height
-	context.beginPath()
-	context.moveTo(0, groundLevel)
-	context.lineTo(context.canvas.width, groundLevel)
-	context.stroke()
+	// Ground
+	drawLine(context, new Vector2(0, groundLevel), new Vector2(context.canvas.width, groundLevel), "#004308", player.height)
 	
+	// Platform 1
+	platforms?.forEach(platform => drawLine(context, platform.start, platform.end, platform.color, platform.width))
+	
+	// Shadow
 	let radius = (player.width / 4) + player.position.y * 0.05
 	if(radius < player.width / 8)
 		radius = player.width / 8
 	if(radius > player.width / 2)
 		radius = player.width / 2
 	
-	context.fillStyle = "#222222"
+	drawPlayerShadow(context, new Vector2(player.position.x + player.width / 2, groundLevel - player.height / 2), radius)
+	
+	sprites?.forEach(sprite => sprite.draw(context))
+}
+
+function drawLine(context: CanvasRenderingContext2D, start: Vector2, end: Vector2, color: string | CanvasGradient | CanvasPattern = "#000", width = 16)
+{
+	context.strokeStyle = color
+	context.lineWidth = width
 	context.beginPath()
-	context.arc(player.position.x + player.width / 2, groundLevel - player.height / 2, radius, 0, Math.PI, false)
+	context.moveTo(start.x, start.y)
+	context.lineTo(end.x, end.y)
+	context.stroke()
+}
+
+function drawPlayerShadow(context: CanvasRenderingContext2D, origin: Vector2, radius: number, color: string | CanvasGradient | CanvasPattern = "#222")
+{
+	context.fillStyle = color
+	context.beginPath()
+	context.arc(origin.x, origin.y, radius, 0, Math.PI, false)
 	context.fill()
 }
