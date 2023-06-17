@@ -9,11 +9,12 @@ import PlayerSpriteSheet, { PlayerSpritePathLeft, PlayerSpritePathRight } from '
 const controller = new PlayerController()
 const canvasProps = new CanvasProperties('gameCanvas')
 const intervalDelay: number = 1000 / 60
-const player = new Player(new Vector2(200, 175))
+const player = new Player(new Vector2(273, 100))
 
 const platforms = [
-	new Platform(new Vector2(50, 300), new Vector2(150, 300)),
-	new Platform(new Vector2(200, 250), new Vector2(250, 250))
+	new Platform(new Vector2(50, 300), new Vector2(150, 300), "#333"),
+	new Platform(new Vector2(200, 250), new Vector2(250, 250), "#444"),
+	new Platform(new Vector2(260, 225), new Vector2(300, 225), "#555")
 ]
 
 export default function Game()

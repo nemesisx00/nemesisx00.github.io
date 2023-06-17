@@ -132,10 +132,9 @@ function renderGround(context: CanvasRenderingContext2D, player: Player, platfor
 	// Ground
 	drawLine(context, new Vector2(0, groundLevel), new Vector2(context.canvas.width, groundLevel), "#004308", player.height)
 	
-	// Platform 1
-	platforms?.forEach(platform => drawLine(context, platform.start, platform.end, platform.color, platform.width))
+	platforms?.forEach(platform => platform.draw(context))
 	
-	// Shadow
+	// Player Shadow
 	let radius = (player.width / 4) + player.position.y * 0.05
 	if(radius < player.width / 8)
 		radius = player.width / 8

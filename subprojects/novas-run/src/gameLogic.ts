@@ -55,7 +55,6 @@ function processVelocity(player: Player, canvasProps: CanvasProperties, height: 
 	
 	let doublePlayerHeight = player.height * 2
 	let halfPlayerHeight = player.height / 2
-	let halfPlayerWidth = player.width / 2
 	
 	//Is on floor?
 	if(player.position.y > height - doublePlayerHeight + 1)
@@ -67,8 +66,8 @@ function processVelocity(player: Player, canvasProps: CanvasProperties, height: 
 	
 	//Is on platform?
 	platforms?.forEach(platform => {
-		if(player.position.x >= platform.start.x - halfPlayerWidth // Left Bound
-			&& player.position.x <= platform.end.x + halfPlayerWidth // Right Bound
+		if(player.position.x >= platform.start.x - player.width // Left Bound
+			&& player.position.x <= platform.end.x - player.width / 4 // Right Bound
 			&& player.position.y >= platform.start.y - platform.width - halfPlayerHeight // Upper Bound
 			&& player.position.y <= platform.end.y) // Lower Bound
 		{

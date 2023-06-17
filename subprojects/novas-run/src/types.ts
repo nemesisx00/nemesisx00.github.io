@@ -47,6 +47,16 @@ export class Platform
 		this.start = start ? start : new Vector2()
 		this.width = width
 	}
+	
+	draw(context: CanvasRenderingContext2D)
+	{
+		context.strokeStyle = this.color
+		context.lineWidth = this.width
+		context.beginPath()
+		context.moveTo(this.start.x, this.start.y)
+		context.lineTo(this.end.x, this.end.y)
+		context.stroke()
+	}
 }
 
 export class Player
