@@ -26,18 +26,25 @@ function renderPlayer(context: CanvasRenderingContext2D, spriteSheetLeft: Player
 function renderGround(context: CanvasRenderingContext2D, player: Player)
 {
 	const groundLevel = context.canvas.height - (player.height / 2)
+	const small = context.canvas.width < 720
 	
 	// Ground
 	drawLine(context, new Vector2(0, groundLevel), new Vector2(context.canvas.width, groundLevel), "#004308", player.height)
 	
-	Levels[player.currentLevel]?.platforms
-		.forEach(platform => platform.draw(context))
-	
 	// Player Shadow
 	drawCircle(context, new Vector2(player.position.x + player.width / 2, groundLevel - player.height / 2), player.shadowRadius())
 	
-	Levels[player.currentLevel]?.sprites
-		.forEach(sprite => sprite.draw(context))
+	let level = Levels[player.currentLevel]
+	if(level)
+	{
+		let maxPlatforms = small ? level.platformsShortMax : level.platforms.length
+		level.platforms
+			.filter((_, index) => index < maxPlatforms)
+			.forEach(platform => platform.draw(context))
+		
+		level.sprites
+			.forEach(sprite => sprite.draw(context))
+	}
 }
 
 function drawLine(context: CanvasRenderingContext2D, start: Vector2, end: Vector2, color: string | CanvasGradient | CanvasPattern = "#000", width = 16)
