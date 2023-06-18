@@ -3,7 +3,7 @@
 
 use dioxus::prelude::*;
 use crate::data::{
-	GithubProfileUrl, KofiProfileUrl,
+	GithubProfileUrl, KofiProfileUrl, LiberapayProfileUrl,
 	HeaderContent, SubtitleContent, TitleContent
 };
 
@@ -26,6 +26,7 @@ pub fn PageTitles(cx: Scope) -> Element
 {
 	let githubUrl = GithubProfileUrl.to_owned();
 	let kofiUrl = KofiProfileUrl.to_owned();
+	let liberapayUrl = LiberapayProfileUrl.to_owned();
 	
 	return cx.render(rsx!
 	{
@@ -49,9 +50,23 @@ pub fn PageTitles(cx: Scope) -> Element
 			{
 				href: "{kofiUrl}",
 				target: "_blank",
-				title: "Support me on Ko-fi!",
+				title: "Donate on Ko-fi!",
 				
 				img { alt: "Ko-fi", src: "./images/third-party/kofi-logo-smol.png" }
+			}
+			
+			a
+			{
+				class: "liberapay",
+				href: "{liberapayUrl}",
+				target: "_blank",
+				title: "Donate on Liberapay!",
+				
+				i
+				{
+					class: "fa fa-liberapay",
+					aria_hidden: "true"
+				}
 			}
 		}
 	});

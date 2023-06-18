@@ -8,6 +8,7 @@ pub const HeaderContent: &'static str = r#"🚧 Under Construction 🚧"#;
 pub const GithubPageBaseUrl: &'static str = "https://nemesisx00.github.io";
 pub const GithubProfileUrl: &'static str = "https://github.com/nemesisx00";
 pub const KofiProfileUrl: &'static str = "https://ko-fi.com/peterlunneberg";
+pub const LiberapayProfileUrl: &'static str = "https://liberapay.com/plunn.dev/";
 
 fn pageUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubPageBaseUrl.to_owned()); }
 fn projectUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubProfileUrl.to_owned()); }
