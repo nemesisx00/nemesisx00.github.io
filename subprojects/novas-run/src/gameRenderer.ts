@@ -16,11 +16,6 @@ function renderPlayer(context: CanvasRenderingContext2D, spriteSheetLeft: Player
 	let animation = player.animation()
 	let frame = player.nextFrameIndex(player.status.directionMove ? spriteSheetRight.frame : spriteSheetLeft.frame)
 	
-	if(!player.status.isMoving && !player.status.isJumping && !player.status.isCrouching && player.frameDeltaSit >= 3000 && frame >= 3)
-		player.status.isSitting = true
-	if(player.status.isMoving)
-		player.status.isSitting = false
-	
 	if(!player.status.directionMove)
 		spriteSheetLeft.drawFrame(context, animation, frame, player.position, { x: player.width, y: player.height })
 	else
@@ -36,7 +31,8 @@ function renderGround(context: CanvasRenderingContext2D, player: Player, platfor
 	
 	platforms?.forEach(platform => platform.draw(context))
 	
-	drawPlayerShadow(context, new Vector2(player.position.x + player.width / 2, groundLevel - player.height / 2), player.shadowRadius())
+	// Player Shadow
+	drawCircle(context, new Vector2(player.position.x + player.width / 2, groundLevel - player.height / 2), player.shadowRadius())
 	
 	sprites?.forEach(sprite => sprite.draw(context))
 }
@@ -51,7 +47,7 @@ function drawLine(context: CanvasRenderingContext2D, start: Vector2, end: Vector
 	context.stroke()
 }
 
-function drawPlayerShadow(context: CanvasRenderingContext2D, origin: Vector2, radius: number, color: string | CanvasGradient | CanvasPattern = "#222")
+function drawCircle(context: CanvasRenderingContext2D, origin: Vector2, radius: number, color: string | CanvasGradient | CanvasPattern = "#222")
 {
 	context.fillStyle = color
 	context.beginPath()
