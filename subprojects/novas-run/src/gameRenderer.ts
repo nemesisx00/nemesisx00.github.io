@@ -1,13 +1,14 @@
+import { Levels } from '@/data/levels'
 import { Player } from "@/player"
 import { Platform, Sprite, Vector2 } from "@/types"
 import PlayerSpriteSheet from "@/spritesheet"
 
-export default function renderGame(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player, platforms?: Platform[], sprites?: Sprite[])
+export default function renderGame(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player)
 {
 	context.fillStyle = "#003A47"
 	context.fillRect(0, 0, context.canvas.width, context.canvas.height)
 	
-	renderGround(context, player, platforms, sprites)
+	renderGround(context, player)
 	renderPlayer(context, spriteSheetLeft, spriteSheetRight, player)
 }
 
@@ -22,19 +23,21 @@ function renderPlayer(context: CanvasRenderingContext2D, spriteSheetLeft: Player
 		spriteSheetRight.drawFrame(context, animation, frame, player.position, { x: player.width, y: player.height })
 }
 
-function renderGround(context: CanvasRenderingContext2D, player: Player, platforms?: Platform[], sprites?: Sprite[])
+function renderGround(context: CanvasRenderingContext2D, player: Player)
 {
 	const groundLevel = context.canvas.height - (player.height / 2)
 	
 	// Ground
 	drawLine(context, new Vector2(0, groundLevel), new Vector2(context.canvas.width, groundLevel), "#004308", player.height)
 	
-	platforms?.forEach(platform => platform.draw(context))
+	Levels[player.currentLevel]?.platforms
+		.forEach(platform => platform.draw(context))
 	
 	// Player Shadow
 	drawCircle(context, new Vector2(player.position.x + player.width / 2, groundLevel - player.height / 2), player.shadowRadius())
 	
-	sprites?.forEach(sprite => sprite.draw(context))
+	Levels[player.currentLevel]?.sprites
+		.forEach(sprite => sprite.draw(context))
 }
 
 function drawLine(context: CanvasRenderingContext2D, start: Vector2, end: Vector2, color: string | CanvasGradient | CanvasPattern = "#000", width = 16)

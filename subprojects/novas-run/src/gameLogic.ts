@@ -1,13 +1,14 @@
+import { Levels } from '@/data/levels'
 import { Player } from "@/player"
-import { CanvasProperties, Platform } from "@/types"
+import { CanvasProperties } from "@/types"
 
-export default function processGameLogic(player: Player, canvasProps: CanvasProperties, height: number, width: number, platforms?: Platform[])
+export default function processGameLogic(player: Player, canvasProps: CanvasProperties, height: number, width: number)
 {
 	player.update()
-	processVelocity(player, canvasProps, height, width, platforms)
+	processVelocity(player, canvasProps, height, width)
 }
 
-function processVelocity(player: Player, canvasProps: CanvasProperties, height: number, width: number, platforms?: Platform[])
+function processVelocity(player: Player, canvasProps: CanvasProperties, height: number, width: number)
 {
 	let halfPlayerHeight = player.height / 2
 	let groundY = height - (player.height * 2) + 1;
@@ -22,7 +23,8 @@ function processVelocity(player: Player, canvasProps: CanvasProperties, height: 
 	
 	player.standOnFloor(groundY)
 	
-	platforms?.filter(platform => platform.detectPlayer(player))
+	Levels[player.currentLevel]?.platforms
+		.filter(platform => platform.detectPlayer(player))
 		.forEach(platform => player.standOnFloor(platform.start.y - platform.width - halfPlayerHeight))
 	
 	//Wrap around

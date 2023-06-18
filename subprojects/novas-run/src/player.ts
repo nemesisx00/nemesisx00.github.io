@@ -3,6 +3,7 @@ import { Vector2 } from "@/types"
 export class Player
 {
 	controller: PlayerController
+	currentLevel: number
 	frameDelta: number
 	frameDeltaSit: number
 	height: number
@@ -20,6 +21,7 @@ export class Player
 	constructor(startingPosition?: Vector2)
 	{
 		this.controller = new PlayerController()
+		this.currentLevel = 0
 		this.frameDelta = 0
 		this.frameDeltaSit = 0
 		this.height = 16
