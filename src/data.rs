@@ -38,15 +38,27 @@ pub fn collectProjectData() -> Vec<ProjectData>
 		ProjectData
 		{
 			backgroundIsVideo: true,
-			backgroundPath: "./images/dice-roller-godot-20sec-loop.webm".into(),
+			backgroundPath: "./video/novas-run-teaser.webm".into(),
+			description: "A web-based 2D platformer written with React/Next.js.".into(),
+			id: "3".into(),
+			label: "Nova's Run".into(),
+			target: "_self".into(),
+			url: "./novas-run".into(),
+			..Default::default()
+		},
+		
+		ProjectData
+		{
+			backgroundIsVideo: true,
+			backgroundPath: "./video/dice-roller-godot-20sec-loop.webm".into(),
 			backgroundPoster: "./images/dice-roller-godot-poster.png".into(),
 			description: "Exploring 3D physics with C++ and Godot 4 in a literal dice roller application.".into(),
-			id: "3".into(),
+			id: "4".into(),
 			label: "Dice Roller (Godot)".into(),
 			url: pageUrl("/dice-roller-godot/"),
 			..Default::default()
 		},
-		
+		/*
 		ProjectData
 		{
 			description: "See what I'm up to on Github!".into(),
@@ -64,6 +76,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 			url: KofiProfileUrl.to_owned(),
 			..Default::default()
 		},
+		*/
 	];
 	
 	return projects;
@@ -78,5 +91,6 @@ pub struct ProjectData
 	pub description: String,
 	pub id: String,
 	pub label: String,
+	pub target: String,
 	pub url: String,
 }

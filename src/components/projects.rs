@@ -60,13 +60,19 @@ fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<Strin
 		cn = format!("{cn} {s}");
 	}
 	
+	let target = match data.target.is_empty()
+	{
+		true => "_blank",
+		false => data.target.as_str(),
+	};
+	
 	return cx.render(rsx!
 	{
 		a
 		{
 			class: "{cn}",
 			href: "{data.url}",
-			target: "_blank",
+			target: "{target}",
 			title: "{data.label}",
 			
 			h1 { "{data.label}" }
