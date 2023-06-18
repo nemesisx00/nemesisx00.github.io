@@ -1,3 +1,4 @@
+import { Player } from "@/player"
 
 export class BoxData
 {
@@ -57,96 +58,13 @@ export class Platform
 		context.lineTo(this.end.x, this.end.y)
 		context.stroke()
 	}
-}
-
-export class Player
-{
-	canJump: boolean
-	directionMove: boolean
-	directionSitFrame: boolean
-	frameDelta: number
-	frameDeltaSit: number
-	height: number
-	isCrouching: boolean
-	isIdle: boolean
-	isJumping: boolean
-	isMoving: boolean
-	isSitting: boolean
-	isSprinting: boolean
-	jumpDelta: number
-	jumpImpulse: number
-	position: Vector2
-	velocity: Vector2
-	speed: number
-	speedCrouch: number
-	speedSprint: number
-	width: number
 	
-	constructor(startingPosition?: Vector2)
+	detectPlayer(player: Player)
 	{
-		this.canJump = true
-		this.directionMove = true
-		this.directionSitFrame = true
-		this.frameDelta = 0
-		this.frameDeltaSit = 0
-		this.height = 16
-		this.isCrouching = false
-		this.isIdle = false
-		this.isJumping = true
-		this.isMoving = false
-		this.isSitting = false
-		this.isSprinting = false
-		this.jumpDelta = 0
-		this.jumpImpulse = 25
-		this.position = startingPosition ? startingPosition : { x: 0, y: 0 }
-		this.velocity = { x: 0, y: 0 }
-		this.speed = 0.1
-		this.speedCrouch = 0.05
-		this.speedSprint = 0.5
-		this.width = 16
-	}
-}
-
-export class PlayerController
-{
-	down: boolean = false
-	left: boolean = false
-	right: boolean = false
-	up: boolean = false
-	sprint: boolean = false
-	
-	constructor() {}
-	
-	handleKeyInput(event: KeyboardEvent)
-	{
-		let pressed = event.type == 'keydown'
-		switch(event.key)
-		{
-			case 'a':
-			case 'ArrowLeft':
-				this.left = pressed
-				break
-			
-			case 'd':
-			case 'ArrowRight':
-				this.right = pressed
-				break
-			
-			case 's':
-			case 'ArrowDown':
-				this.down = pressed
-				break
-			
-			case 'v':
-			case '0':
-				this.sprint = pressed
-				break
-			
-			case 'w':
-			case 'ArrowUp':
-				this.up = pressed
-				break
-		}
+		return player.position.x >= this.start.x - player.width // Left Bound
+			&& player.position.x <= this.end.x - player.width / 4 // Right Bound
+			&& player.position.y >= this.start.y - this.width - player.height / 2 // Upper Bound
+			&& player.position.y <= this.end.y // Lower Bound
 	}
 }
 

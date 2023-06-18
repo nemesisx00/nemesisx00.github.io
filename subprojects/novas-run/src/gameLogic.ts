@@ -1,51 +1,10 @@
-import { CanvasProperties, Platform, Player, PlayerController } from "@/types"
+import { Player } from "@/player"
+import { CanvasProperties, Platform } from "@/types"
 
-export default function processGameLogic(player: Player, controller: PlayerController, canvasProps: CanvasProperties, height: number, width: number, platforms?: Platform[])
+export default function processGameLogic(player: Player, canvasProps: CanvasProperties, height: number, width: number, platforms?: Platform[])
 {
-	handleMovementInput(player, controller)
+	player.update()
 	processVelocity(player, canvasProps, height, width, platforms)
-}
-
-function handleMovementInput(player: Player, controller: PlayerController)
-{
-	if(controller.up)
-	{
-		if(player.canJump && !player.isJumping)
-		{
-			player.canJump = false
-			player.jumpDelta = 0
-			player.isJumping = true
-			player.velocity.y -= player.jumpImpulse
-		}
-	}
-	
-	if(controller.left)
-	{
-		player.velocity.x -= player.isCrouching
-								? player.speedCrouch
-								: player.isSprinting
-									? player.speedSprint
-									: player.speed
-		
-		if(!controller.right)
-			player.directionMove = false
-	}
-	
-	if(controller.right)
-	{
-		player.velocity.x += player.isCrouching
-								? player.speedCrouch
-								: player.isSprinting
-									? player.speedSprint
-									: player.speed
-		
-		if(!controller.left)
-			player.directionMove = true
-	}
-	
-	player.isCrouching = controller.down
-	player.isMoving = controller.left != controller.right
-	player.isSprinting = controller.sprint
 }
 
 function processVelocity(player: Player, canvasProps: CanvasProperties, height: number, width: number, platforms?: Platform[])
@@ -61,26 +20,10 @@ function processVelocity(player: Player, canvasProps: CanvasProperties, height: 
 	player.velocity.x *= canvasProps.friction.x
 	player.velocity.y *= canvasProps.friction.y
 	
-	//Is on floor?
-	if(player.position.y > groundY)
-	{
-		player.isJumping = false
-		player.position.y = groundY
-		player.velocity.y = 0
-	}
+	player.standOnFloor(groundY)
 	
-	//Is on platform?
-	platforms?.forEach(platform => {
-		if(player.position.x >= platform.start.x - player.width // Left Bound
-			&& player.position.x <= platform.end.x - player.width / 4 // Right Bound
-			&& player.position.y >= platform.start.y - platform.width - halfPlayerHeight // Upper Bound
-			&& player.position.y <= platform.end.y) // Lower Bound
-		{
-			player.isJumping = false
-			player.position.y = platform.start.y - platform.width - halfPlayerHeight
-			player.velocity.y = 0
-		}
-	})
+	platforms?.filter(platform => platform.detectPlayer(player))
+		.forEach(platform => player.standOnFloor(platform.start.y - platform.width - halfPlayerHeight))
 	
 	//Wrap around
 	let wrapWidth = player.width * canvasProps.wrapFactor

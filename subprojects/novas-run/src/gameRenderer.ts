@@ -1,4 +1,5 @@
-import { BoxData, Platform, Player, Sprite, Vector2 } from "@/types"
+import { Player } from "@/player"
+import { Platform, Sprite, Vector2 } from "@/types"
 import PlayerSpriteSheet from "@/spritesheet"
 
 export default function renderGame(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player, platforms?: Platform[], sprites?: Sprite[])
@@ -12,117 +13,18 @@ export default function renderGame(context: CanvasRenderingContext2D, spriteShee
 
 function renderPlayer(context: CanvasRenderingContext2D, spriteSheetLeft: PlayerSpriteSheet, spriteSheetRight: PlayerSpriteSheet, player: Player)
 {
-	let animation = getAnimation(player)
-	let frame = getNextFrameIndex(player.directionMove ? spriteSheetRight.frame : spriteSheetLeft.frame, player)
+	let animation = player.animation()
+	let frame = player.nextFrameIndex(player.status.directionMove ? spriteSheetRight.frame : spriteSheetLeft.frame)
 	
-	if(!player.isMoving && !player.isJumping && !player.isCrouching && player.frameDeltaSit >= 3000 && frame >= 3)
-		player.isSitting = true
-	if(player.isMoving)
-		player.isSitting = false
+	if(!player.status.isMoving && !player.status.isJumping && !player.status.isCrouching && player.frameDeltaSit >= 3000 && frame >= 3)
+		player.status.isSitting = true
+	if(player.status.isMoving)
+		player.status.isSitting = false
 	
-	if(!player.directionMove)
+	if(!player.status.directionMove)
 		spriteSheetLeft.drawFrame(context, animation, frame, player.position, { x: player.width, y: player.height })
 	else
 		spriteSheetRight.drawFrame(context, animation, frame, player.position, { x: player.width, y: player.height })
-}
-
-function getAnimation(player: Player)
-{
-	let animation = 'idle'
-	
-	if(player.isJumping || player.isCrouching || player.isSprinting || player.isMoving)
-	{
-		player.frameDeltaSit = 0
-		
-		if(player.isJumping)
-			animation = 'jump'
-		else if(player.isCrouching)
-			animation = 'sneak'
-		else if(player.isSprinting)
-			animation = 'run'
-		else if(player.isMoving)
-			animation = 'walk'
-	}
-	else if(player.frameDeltaSit >= 3000)
-	{
-		if(player.isSitting)
-			animation = 'idleSit'
-		else
-			animation = 'sit'
-	}
-	
-	return animation
-}
-
-function getNextFrameIndex(currentFrame: number, player: Player)
-{
-	let frame = currentFrame
-	if(
-		(
-			player.isMoving
-			&& (
-				(player.isCrouching && !player.isSprinting && player.frameDelta >= 300)
-				|| (!player.isCrouching && player.isSprinting && player.frameDelta >= 100)
-				|| player.frameDelta >= 175
-			)
-		)
-		|| player.frameDelta >= 300
-	)
-	{
-		if(player.directionMove)
-		{
-			if(player.isSitting)
-			{
-				if(frame <= 3)
-				{
-					frame = 3
-					player.directionSitFrame = true
-				}
-				
-				if(frame >= 6)
-					player.directionSitFrame = false
-			}
-			
-			let prevFrame = frame
-			if(player.isSitting && !player.directionSitFrame)
-				frame--
-			else
-				frame++
-			
-			if(player.isCrouching && !player.isMoving)
-				frame = prevFrame
-		}
-		else
-		{
-			if(player.isSitting)
-			{
-				if(frame >= 4)
-				{
-					frame = 4
-					player.directionSitFrame = true
-				}
-				
-				if(frame <= 1)
-					player.directionSitFrame = false
-			}
-			
-			let prevFrame = frame
-			if(player.isSitting && !player.directionSitFrame)
-				frame++
-			else
-				frame--
-			
-			if(player.isCrouching && !player.isMoving)
-				frame = prevFrame
-		}
-		
-		player.frameDelta = 0
-	}
-	
-	if(player.isJumping)
-		frame = player.directionMove ? 7 : 0
-	
-	return frame
 }
 
 function renderGround(context: CanvasRenderingContext2D, player: Player, platforms?: Platform[], sprites?: Sprite[])
@@ -134,14 +36,7 @@ function renderGround(context: CanvasRenderingContext2D, player: Player, platfor
 	
 	platforms?.forEach(platform => platform.draw(context))
 	
-	// Player Shadow
-	let radius = (player.width / 4) + player.position.y * 0.05
-	if(radius < player.width / 8)
-		radius = player.width / 8
-	if(radius > player.width / 2)
-		radius = player.width / 2
-	
-	drawPlayerShadow(context, new Vector2(player.position.x + player.width / 2, groundLevel - player.height / 2), radius)
+	drawPlayerShadow(context, new Vector2(player.position.x + player.width / 2, groundLevel - player.height / 2), player.shadowRadius())
 	
 	sprites?.forEach(sprite => sprite.draw(context))
 }

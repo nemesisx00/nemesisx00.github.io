@@ -3,14 +3,13 @@
 import React, { useRef, useEffect, useState } from 'react'
 import processGameLogic from '@/gameLogic'
 import renderGame from '@/gameRenderer'
-import { BoxData, CanvasProperties, Platform, Player, PlayerController, Sprite, Vector2 } from '@/types'
+import { Player } from "@/player"
+import { CanvasProperties, Platform, Vector2 } from '@/types'
 import PlayerSpriteSheet, { PlayerSpritePathLeft, PlayerSpritePathRight } from '@/spritesheet'
 
-const controller = new PlayerController()
 const canvasProps = new CanvasProperties('gameCanvas')
 const intervalDelay: number = 1000 / 60
-const player = new Player(new Vector2(273, 100))
-const jumpRate = intervalDelay * 30
+const player = new Player(new Vector2(273, 150))
 
 const platforms = [
 	new Platform(new Vector2(50, 300), new Vector2(150, 300), "#333"),
@@ -49,6 +48,8 @@ export default function Game()
 			
 			if(spriteSheetLeft && spriteSheetRight)
 			{
+				player.jumpRate = intervalDelay * 30
+				
 				if(!gameLoopInterval)
 				{
 					gameLoopInterval = setInterval(() => {
@@ -56,17 +57,14 @@ export default function Game()
 						player.frameDeltaSit += intervalDelay
 						player.jumpDelta += intervalDelay
 						
-						if(player.jumpDelta >= jumpRate)
-							player.canJump = true
-						
-						processGameLogic(player, controller, canvasProps, canvasHeight, canvasWidth, platforms)
+						processGameLogic(player, canvasProps, canvasHeight, canvasWidth, platforms)
 						renderGame(context, spriteSheetLeft, spriteSheetRight, player, platforms)
 					}, intervalDelay)
 				}
 			}
 		}
 		
-		const handleKeyInput = (e: KeyboardEvent) => controller.handleKeyInput(e)
+		const handleKeyInput = (e: KeyboardEvent) => player.controller.handleKeyInput(e)
 		
 		global?.window?.addEventListener('keydown', handleKeyInput)
 		global?.window?.addEventListener('keyup', handleKeyInput)
