@@ -1,4 +1,3 @@
-import { Levels } from '@/data/levels'
 import { Vector2 } from '@/types'
 
 export class Player
@@ -144,16 +143,16 @@ export class Player
 		return frame
 	}
 	
-	nextLevel(left: boolean = false)
+	nextLevel(length: number, left: boolean = false)
 	{
 		if(left)
 		{
 			this.currentLevel--
 			if(this.currentLevel < 0)
-				this.currentLevel = Levels.length - 1
+				this.currentLevel = length - 1
 		}
 		else
-			this.currentLevel = (this.currentLevel + 1) % Levels.length
+			this.currentLevel = (this.currentLevel + 1) % length
 	}
 	
 	standOnFloor(y: number)

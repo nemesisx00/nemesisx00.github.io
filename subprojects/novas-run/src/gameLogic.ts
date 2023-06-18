@@ -32,11 +32,11 @@ function processVelocity(player: Player, canvasProps: CanvasProperties, height: 
 	if(player.position.x < -wrapWidth)
 	{
 		player.position.x = width - wrapWidth
-		player.nextLevel(true)
+		player.nextLevel(Levels.length, true)
 	}
 	else if(player.position.x > width - wrapWidth)
 	{
 		player.position.x = -wrapWidth
-		player.nextLevel()
+		player.nextLevel(Levels.length)
 	}
 }
