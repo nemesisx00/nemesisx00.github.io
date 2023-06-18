@@ -133,6 +133,11 @@ export class Player
 		if(this.status.isJumping)
 			frame = this.status.directionMove ? 7 : 0
 		
+		if(!this.status.isMoving && !this.status.isJumping && !this.status.isCrouching && this.frameDeltaSit >= 3000 && frame >= 3)
+			this.status.isSitting = true
+		if(this.status.isMoving)
+			this.status.isSitting = false
+		
 		return frame
 	}
 	
@@ -203,7 +208,7 @@ export class Player
 	}
 }
 
-export class PlayerController
+class PlayerController
 {
 	down: boolean = false
 	left: boolean = false
@@ -246,7 +251,7 @@ export class PlayerController
 	}
 }
 
-export class PlayerStatus
+class PlayerStatus
 {
 	canJump: boolean
 	directionMove: boolean
