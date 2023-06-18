@@ -30,7 +30,13 @@ function processVelocity(player: Player, canvasProps: CanvasProperties, height: 
 	//Wrap around
 	let wrapWidth = player.width * canvasProps.wrapFactor
 	if(player.position.x < -wrapWidth)
+	{
 		player.position.x = width - wrapWidth
+		player.nextLevel(true)
+	}
 	else if(player.position.x > width - wrapWidth)
+	{
 		player.position.x = -wrapWidth
+		player.nextLevel()
+	}
 }

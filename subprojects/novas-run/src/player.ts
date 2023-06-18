@@ -1,4 +1,5 @@
-import { Vector2 } from "@/types"
+import { Levels } from '@/data/levels'
+import { Vector2 } from '@/types'
 
 export class Player
 {
@@ -141,6 +142,18 @@ export class Player
 			this.status.isSitting = false
 		
 		return frame
+	}
+	
+	nextLevel(left: boolean = false)
+	{
+		if(left)
+		{
+			this.currentLevel--
+			if(this.currentLevel < 0)
+				this.currentLevel = Levels.length - 1
+		}
+		else
+			this.currentLevel = (this.currentLevel + 1) % Levels.length
 	}
 	
 	standOnFloor(y: number)
