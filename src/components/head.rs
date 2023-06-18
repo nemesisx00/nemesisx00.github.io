@@ -4,18 +4,39 @@
 use dioxus::prelude::*;
 use crate::data::{
 	GithubProfileUrl, KofiProfileUrl, LiberapayProfileUrl,
-	HeaderContent, SubtitleContent, TitleContent
+	HeaderContent, SubtitleContent, TitleContent,
+	collectProjectData
 };
 
 pub fn PageHeader(cx: Scope) -> Element
 {
+	let projects = collectProjectData();
+	
 	return cx.render(rsx!
 	{
 		header
 		{
 			class: "content",
 			
-			"{HeaderContent}"
+			nav
+			{
+				id: "mainNav",
+				
+				for (index, project) in projects.iter().enumerate()
+				{
+					(index > 0).then(|| rsx!(div { class: "navSpacer" }))
+					
+					a
+					{
+						key: "{index}",
+						href: "{project.url}",
+						target: "{project.target}",
+						"{project.label}"
+					}
+				}
+			}
+			
+			p { "{HeaderContent}" }
 		}
 	});
 }

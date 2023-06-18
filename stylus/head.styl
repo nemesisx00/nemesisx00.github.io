@@ -5,7 +5,7 @@
 	
 	& #socialLinks
 		flex(row)
-		align-items centers
+		align-items center
 		justify-content center
 		line-height socialLinkSize
 		margin-top 5px
@@ -29,3 +29,19 @@
 		margin 25px auto
 		max-width 65%
 		text-align justify
+		
+		& #mainNav
+			flex(row)
+			align-items center
+			justify-content space-evenly
+			
+			& a
+				font-weight bold
+			
+			& .navSpacer
+				border-left 1px solid whiteOff
+				height 15px
+				margin 0 20px
+		
+		& p
+			text-align center
