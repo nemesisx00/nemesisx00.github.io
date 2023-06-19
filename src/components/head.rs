@@ -64,16 +64,24 @@ pub fn PageTitles(cx: Scope) -> Element
 				target: "_blank",
 				title: "Github Profile",
 				
-				img { alt: "Github", src: "./images/third-party/github-mark/github-mark-white.svg" }
+				img
+				{
+					alt: "Github",
+					src: "./images/third-party/github-mark/github-mark-white.svg"
+				}
 			}
 			
 			a
 			{
 				href: "{kofiUrl}",
 				target: "_blank",
-				title: "Donate on Ko-fi!",
+				title: "Support me on Ko-fi!",
 				
-				img { alt: "Ko-fi", src: "./images/third-party/kofi-logo-smol.png" }
+				img
+				{
+					alt: "Ko-fi",
+					src: "./images/third-party/kofi-logo-smol.png"
+				}
 			}
 			
 			a

@@ -20,7 +20,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 		{
 			backgroundIsVideo: false,
 			backgroundPath: "./images/ocsm-promo-zoom.png".into(),
-			description: "Open Character Sheet Manager is an open source cross-platform desktop application for conveniently managing TableTop RolePlaying Game character sheets for a wide variety of game systems.".into(),
+			description: "Open Character Sheet Manager is an open source cross-platform desktop application for conveniently managing TTRPG character sheets.".into(),
 			id: "1".into(),
 			label: "OCSM".into(),
 			target: "_blank".into(),
@@ -42,6 +42,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 		{
 			backgroundIsVideo: true,
 			backgroundPath: "./video/novas-run-teaser.webm".into(),
+			backgroundPoster: "./images/novas-run-teaser-poster.png".into(),
 			description: "A web-based 2D platformer written with React/Next.js.".into(),
 			id: "3".into(),
 			label: "Nova's Run".into(),
