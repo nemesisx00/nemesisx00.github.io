@@ -1,8 +1,8 @@
 #![allow(non_snake_case, non_upper_case_globals)]
 #![cfg_attr(debug_assertions, allow(dead_code))]
 
-use dioxus::prelude::*;
 use std::collections::HashMap;
+use ::dioxus::prelude::*;
 use crate::data::ProjectData;
 
 #[inline_props]
