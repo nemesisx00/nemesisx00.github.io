@@ -1,7 +1,7 @@
 #![allow(non_snake_case, non_upper_case_globals)]
 #![cfg_attr(debug_assertions, allow(dead_code))]
 
-use dioxus::prelude::*;
+use ::dioxus::prelude::*;
 use crate::data::{
 	GithubProfileUrl, KofiProfileUrl, LiberapayProfileUrl,
 	HeaderContent, SubtitleContent, TitleContent,
@@ -17,6 +17,8 @@ pub fn PageHeader(cx: Scope) -> Element
 		header
 		{
 			class: "content",
+			
+			PageTitles {}
 			
 			nav
 			{
@@ -36,7 +38,7 @@ pub fn PageHeader(cx: Scope) -> Element
 				}
 			}
 			
-			p { "{HeaderContent}" }
+			(!HeaderContent.is_empty()).then(|| rsx!(p { class: "headerContent", "{HeaderContent}" }))
 		}
 	});
 }
