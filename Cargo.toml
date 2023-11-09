@@ -1,17 +1,15 @@
 [package]
 name = "nemesisx00-github-io"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Peter Lunneberg"]
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-dioxus = { git = "https://github.com/DioxusLabs/dioxus" }
-dioxus-web = { git = "https://github.com/DioxusLabs/dioxus"}
-
+dioxus = "~0.4"
+dioxus-web = "~0.4"
 log = "~0"
-
 # WebAssembly Debug
 wasm-logger = "~0"
 console_error_panic_hook = "~0"
