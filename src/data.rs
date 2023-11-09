@@ -2,8 +2,8 @@
 #![cfg_attr(debug_assertions, allow(dead_code))]
 
 pub const TitleContent: &'static str = "Peter Lunneberg";
-pub const SubtitleContent: &'static str = "Full Stack Software Developer";
-pub const HeaderContent: &'static str = r#"🚧 Under Construction 🚧"#;
+pub const SubtitleContent: &'static str = "Software Developer";
+pub const HeaderContent: &'static str = r#""#;
 
 pub const GithubPageBaseUrl: &'static str = "https://nemesisx00.github.io";
 pub const GithubProfileUrl: &'static str = "https://github.com/nemesisx00";
@@ -30,9 +30,19 @@ pub fn collectProjectData() -> Vec<ProjectData>
 		
 		ProjectData
 		{
-			description: "A desktop GUI frontend for yt-dlp written in Rust using Dioxus.".into(),
+			description: "A library for parsing Infinity Engine game files written in Rust.".into(),
 			id: "2".into(),
-			label: "rust-vdl".into(),
+			label: "Infinity Engine Parser".into(),
+			target: "_blank".into(),
+			url: projectUrl("/infinity-engine-parser"),
+			..Default::default()
+		},
+		
+		ProjectData
+		{
+			description: "A desktop GUI frontend for yt-dlp written in Rust using Dioxus.".into(),
+			id: "3".into(),
+			label: "Rust VDL".into(),
 			target: "_blank".into(),
 			url: projectUrl("/rust-vdl"),
 			..Default::default()
@@ -44,7 +54,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 			backgroundPath: "./video/novas-run-teaser.webm".into(),
 			backgroundPoster: "./images/novas-run-teaser-poster.png".into(),
 			description: "A web-based 2D platformer written with React/Next.js.".into(),
-			id: "3".into(),
+			id: "4".into(),
 			label: "Nova's Run".into(),
 			target: "_self".into(),
 			url: "./novas-run".into(),
@@ -57,7 +67,7 @@ pub fn collectProjectData() -> Vec<ProjectData>
 			backgroundPath: "./video/dice-roller-godot-20sec-loop.webm".into(),
 			backgroundPoster: "./images/dice-roller-godot-poster.png".into(),
 			description: "Exploring 3D physics with C++ and Godot 4 in a literal dice roller application.".into(),
-			id: "4".into(),
+			id: "5".into(),
 			label: "Dice Roller (Godot)".into(),
 			target: "_blank".into(),
 			url: pageUrl("/dice-roller-godot/"),
