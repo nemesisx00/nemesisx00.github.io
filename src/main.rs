@@ -4,8 +4,8 @@
 mod components;
 mod data;
 
-use dioxus::prelude::*;
-use crate::components::{BodyContent, PageHeader, PageTitles, ProjectList};
+use ::dioxus::prelude::*;
+use crate::components::{BodyContent, PageHeader, ProjectList};
 use crate::data::collectProjectData;
 
 fn main()
@@ -13,18 +13,17 @@ fn main()
 	if cfg!(debug_assertions)
 	{
 		// init debug tool for WebAssembly
-		wasm_logger::init(wasm_logger::Config::default());
-		console_error_panic_hook::set_once();
+		::wasm_logger::init(wasm_logger::Config::default());
+		::console_error_panic_hook::set_once();
 	}
 	
-	dioxus_web::launch(App);
+	::dioxus_web::launch(App);
 }
 
 fn App(cx: Scope) -> Element
 {
 	return cx.render(rsx!
 	{
-		PageTitles {}
 		PageHeader {}
 		ProjectList { projects: collectProjectData() }
 		BodyContent {}
