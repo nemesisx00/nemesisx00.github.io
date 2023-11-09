@@ -1,39 +1,51 @@
 #main
-
-	& > h1
-		font-size headerSize
-	
-	& #socialLinks
-		flex(row)
-		align-items center
-		justify-content center
-		line-height socialLinkSize
-		margin-top 5px
-		
-		& a
-			display inline-block
-			height socialLinkSize
-			margin 0 3px
-			
-			& img
-				height socialLinkSize
-		
-		& .liberapay
-			overflow visible
-			
-			& i
-				font-size 1.5em
 	
 	& header.content
+		background-color blueDark
 		font-size contentSize
-		margin 25px auto
-		max-width 65%
+		left 0
+		padding-bottom 15px
+		position fixed
 		text-align justify
+		top 0
+		width 100%
+		z-index 10000
+		
+		& h1,h2,h3,h4,h5,h6
+			text-align center
+			font-size inherit
+		
+		& h1
+			font-size headerSize
+		
+		& #socialLinks
+			flex(row)
+			align-items center
+			font-size inherit
+			justify-content center
+			line-height socialLinkSize
+			margin-top 5px
+			
+			& a
+				display inline-block
+				height socialLinkSize
+				margin 0 3px
+				
+				& img
+					height socialLinkSize
+			
+			& .liberapay
+				overflow visible
+				
+				& i
+					font-size 1.5em
 		
 		& #mainNav
 			flex(row)
 			align-items center
 			justify-content space-evenly
+			margin 15px auto 0
+			max-width 65%
 			
 			& a
 				font-weight bold
@@ -43,5 +55,6 @@
 				height 15px
 				margin 0 20px
 		
-		& p
+		& p.headerContent
+			margin-bottom 0
 			text-align center
