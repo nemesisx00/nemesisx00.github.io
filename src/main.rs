@@ -3,6 +3,7 @@
 
 mod components;
 mod data;
+mod util;
 
 use ::dioxus::prelude::*;
 use crate::components::{BodyContent, PageHeader, ProjectList};
