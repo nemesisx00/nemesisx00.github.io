@@ -5,12 +5,15 @@ pub const TitleContent: &'static str = "Peter Lunneberg";
 pub const SubtitleContent: &'static str = "Software Developer";
 pub const HeaderContent: &'static str = r#""#;
 
+pub const ContactEmail: &'static str = "plunn.collab@gmail.com";
+
 pub const GithubPageBaseUrl: &'static str = "https://nemesisx00.github.io";
 pub const GithubProfileUrl: &'static str = "https://github.com/nemesisx00";
 pub const KofiProfileUrl: &'static str = "https://ko-fi.com/peterlunneberg";
 pub const LiberapayProfileUrl: &'static str = "https://liberapay.com/plunn.dev/";
 
-pub const RainDropDensity: usize = 250;
+pub const RainDropDensityMax: usize = 500;
+pub const RainDropDensityMin: usize = 50;
 
 fn pageUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubPageBaseUrl.to_owned()); }
 fn projectUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubProfileUrl.to_owned()); }

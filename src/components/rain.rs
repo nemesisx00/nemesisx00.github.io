@@ -3,17 +3,20 @@
 
 use ::dioxus::prelude::*;
 use ::rand::random;
-use crate::data::RainDropDensity;
+use crate::data::{RainDropDensityMax, RainDropDensityMin};
+use crate::util::rangeRandom;
 
 pub fn RainBackground(cx: Scope) -> Element
 {
+	let density = rangeRandom(RainDropDensityMin as f64, RainDropDensityMax as f64) as usize;
+	
 	return cx.render(rsx!
 	{
 		div
 		{
 			class: "rain",
 			
-			for i in 0..RainDropDensity
+			for i in 0..density
 			{
 				RainDrop { key: "{i}" }
 			}

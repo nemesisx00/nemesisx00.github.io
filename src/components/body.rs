@@ -2,6 +2,7 @@
 #![cfg_attr(debug_assertions, allow(dead_code))]
 
 use ::dioxus::prelude::*;
+use crate::data::ContactEmail;
 
 pub fn BodyContent(cx: Scope) -> Element
 {
@@ -28,6 +29,8 @@ Call to action.
 #[inline_props]
 fn Collaborate(cx: Scope, lookingForWork: bool) -> Element
 {
+	let emailHref = format!("mailto:{}", ContactEmail);
+	
 	return cx.render(rsx!
 	{
 		section
@@ -74,7 +77,7 @@ fn Collaborate(cx: Scope, lookingForWork: bool) -> Element
 			a
 			{
 				class: "button",
-				href: "mailto:plunn.collab@gmail.com",
+				href: "{emailHref}",
 				"Reach Out"
 			}
 		}
