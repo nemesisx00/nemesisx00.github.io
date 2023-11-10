@@ -1,0 +1,18 @@
+@media print
+	#main
+		& .cv
+			font-size .8rem
+			width 80vw
+			
+			& header
+				margin-top 3.5em
+			
+			& .portfolio + hr
+				break-before page
+				hide()
+				
+				& + .workExperience
+					margin-top 4.5em
+		
+		& footer
+			hide()

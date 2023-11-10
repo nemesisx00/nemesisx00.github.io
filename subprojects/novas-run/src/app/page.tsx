@@ -33,7 +33,11 @@ export default function Home()
 				</ul>
 			</div>
 			
-			<div className={styles.footer}>© 2023 Peter Lunneberg</div>
+			<div className={styles.footer}>
+				<span>© 2023 Peter Lunneberg</span>
+				<span className={styles.footerSeparator}>|</span>
+				<a href="/">Portfolio</a>
+			</div>
 		</main>
 	)
 }

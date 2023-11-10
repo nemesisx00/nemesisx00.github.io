@@ -5,9 +5,7 @@ mod components;
 mod data;
 mod util;
 
-use ::dioxus::prelude::*;
-use crate::components::{BodyContent, PageHeader, ProjectList};
-use crate::data::collectProjectData;
+use crate::components::App;
 
 fn main()
 {
@@ -19,16 +17,4 @@ fn main()
 	}
 	
 	::dioxus_web::launch(App);
-}
-
-fn App(cx: Scope) -> Element
-{
-	return cx.render(rsx!
-	{
-		PageHeader {}
-		ProjectList { projects: collectProjectData() }
-		BodyContent {}
-		
-		footer { "© 2023 Peter Lunneberg" }
-	});
 }

@@ -2,15 +2,17 @@
 #![cfg_attr(debug_assertions, allow(dead_code))]
 
 use ::dioxus::prelude::*;
+use ::dioxus_router::prelude::*;
 use crate::data::{
 	GithubProfileUrl, KofiProfileUrl, LiberapayProfileUrl,
 	HeaderContent, SubtitleContent, TitleContent,
 	collectProjectData
 };
+use super::route::Route;
 
 pub fn PageHeader(cx: Scope) -> Element
 {
-	let projects = collectProjectData();
+	let projects = collectProjectData(false);
 	
 	return cx.render(rsx!
 	{
@@ -59,6 +61,13 @@ pub fn PageTitles(cx: Scope) -> Element
 		h4
 		{
 			id: "socialLinks",
+			
+			Link
+			{
+				class: "cv",
+				to: Route::Cv {},
+				"CV"
+			}
 			
 			a
 			{

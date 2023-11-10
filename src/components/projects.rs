@@ -3,12 +3,12 @@
 
 use std::collections::HashMap;
 use ::dioxus::prelude::*;
-use crate::data::ProjectData;
+use crate::data::{ProjectData, collectProjectData};
 use super::rain::RainBackground;
 
-#[inline_props]
-pub fn ProjectList(cx: Scope, projects: Vec<ProjectData>) -> Element
+pub fn ProjectList(cx: Scope) -> Element
 {
+	let projects = collectProjectData(false);
 	let classes = buildInitialClassMap(projects.clone());
 	
 	return cx.render(rsx!

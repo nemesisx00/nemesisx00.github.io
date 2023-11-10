@@ -41,6 +41,10 @@ jobs:
           npm install
           dx build --release
       
+      - name: Add fallback file
+        run: |
+          cp '${{github.workspace}}/web/index.html' '${{github.workspace}}/web/404.html'
+      
       - name: Setup Pages
         uses: actions/configure-pages@v3
       

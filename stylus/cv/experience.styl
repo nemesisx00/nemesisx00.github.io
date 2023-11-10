@@ -1,0 +1,34 @@
+#main .cv
+	
+	& .workExperience
+		
+		& h1
+			margin-bottom 1em
+		
+		& h3 + h4, & h5
+			font-weight normal
+		
+		& .job
+			flex(column)
+			margin-bottom 2.5em
+			
+			&:last-child
+				margin-bottom 0
+			
+			& > div
+				flex(row)
+				margin-bottom 1em
+				
+				& .left
+					flex-grow 9
+					text-align left
+				
+				& .right
+					flex-grow 1
+			
+			& p
+				margin .15em 0
+				text-align justify
+				
+				& span
+					margin-left 2em
