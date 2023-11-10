@@ -78,7 +78,27 @@
 			text-align justify
 			z-index 1000
 		
+		&.noBackground
+			background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, daylight 100%)
+			
+			&.current
+				animation-name bgGradientTransition1
+				animation-timing-function linear
+				animation-iteration-count 1
+				animation-duration 1s
+			
+			&.previous
+				background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, night 100%)
+				animation-name bgGradientTransition2
+				animation-timing-function linear
+				animation-iteration-count 1
+				animation-duration 1s
+			
+			&.next
+				background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, morning 100%)
+		
 		& .rain
+			background-color: transparent;
 			height 500px
 			width 100%
 			
@@ -104,3 +124,47 @@
 	100%
 		opacity 0
 		transform translateY(400px)
+
+@keyframes bgGradientTransition1
+	0%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, morning 100%)
+	10%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #FE5440 100%)
+	20%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #FD6450 100%)
+	30%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #FC7460 100%)
+	40%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #FB8470 100%)
+	50%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #FA9480 100%)
+	60%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #F9A490 100%)
+	70%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #F8B4A0 100%)
+	80%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #F7C4B0 100%)
+	90%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, daylight 100%)
+
+@keyframes bgGradientTransition2
+	0%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, daylight 100%)
+	10%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #D6BDB4 100%)
+	20%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #C6ADBD 100%)
+	30%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #B69DC4 100%)
+	40%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #A67DCD 100%)
+	50%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #865DD4 100%)
+	60%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #764DDD 100%)
+	70%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #662DE4 100%)
+	80%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, #561DED 100%)
+	90%
+		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, night 100%)

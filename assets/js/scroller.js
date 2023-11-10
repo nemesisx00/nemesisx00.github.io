@@ -37,7 +37,7 @@ function updateSelectedProject(target)
 	projects.forEach((el, i) => {
 		let cn = el.className
 					.split(' ')
-					.filter(s => ['previous', 'next', 'show'].indexOf(s) < 0)
+					.filter(s => ['previous', 'next', 'show', 'current'].indexOf(s) < 0)
 		
 		switch(i)
 		{
@@ -53,6 +53,7 @@ function updateSelectedProject(target)
 				break
 			case current:
 				cn.push('show')
+				cn.push('current')
 				el.className = cn.join(' ')
 				break
 			default:
