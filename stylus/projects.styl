@@ -82,14 +82,14 @@
 			background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, daylight 100%)
 			
 			&.current
-				animation-name bgGradientTransition1
+				animation-name morningToDay
 				animation-timing-function linear
 				animation-iteration-count 1
 				animation-duration 1s
 			
 			&.previous
 				background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, night 100%)
-				animation-name bgGradientTransition2
+				animation-name dayToNight
 				animation-timing-function linear
 				animation-iteration-count 1
 				animation-duration 1s
@@ -125,7 +125,7 @@
 		opacity 0
 		transform translateY(400px)
 
-@keyframes bgGradientTransition1
+@keyframes morningToDay
 	0%
 		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, morning 100%)
 	10%
@@ -147,7 +147,7 @@
 	90%
 		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, daylight 100%)
 
-@keyframes bgGradientTransition2
+@keyframes dayToNight
 	0%
 		background linear-gradient(0deg, blueLight 0%, blueLightTransition 25%, daylight 100%)
 	10%
