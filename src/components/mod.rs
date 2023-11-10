@@ -4,6 +4,7 @@
 mod body;
 mod head;
 mod projects;
+mod rain;
 
 pub use body::BodyContent;
 pub use head::{PageHeader, PageTitles};

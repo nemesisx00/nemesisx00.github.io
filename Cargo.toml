@@ -9,7 +9,9 @@ edition = "2021"
 [dependencies]
 dioxus = "~0.4"
 dioxus-web = "~0.4"
+getrandom = { version = "~0", features = ["js"] }
 log = "~0"
+rand = { version = "~0", features = [ "alloc", "libc", "rand_chacha", "std" ] }
 # WebAssembly Debug
 wasm-logger = "~0"
 console_error_panic_hook = "~0"

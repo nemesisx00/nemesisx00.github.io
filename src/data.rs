@@ -10,6 +10,8 @@ pub const GithubProfileUrl: &'static str = "https://github.com/nemesisx00";
 pub const KofiProfileUrl: &'static str = "https://ko-fi.com/peterlunneberg";
 pub const LiberapayProfileUrl: &'static str = "https://liberapay.com/plunn.dev/";
 
+pub const RainDropDensity: usize = 250;
+
 fn pageUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubPageBaseUrl.to_owned()); }
 fn projectUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubProfileUrl.to_owned()); }
 

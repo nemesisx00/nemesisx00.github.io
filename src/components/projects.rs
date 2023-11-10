@@ -4,6 +4,7 @@
 use std::collections::HashMap;
 use ::dioxus::prelude::*;
 use crate::data::ProjectData;
+use super::rain::RainBackground;
 
 #[inline_props]
 pub fn ProjectList(cx: Scope, projects: Vec<ProjectData>) -> Element
@@ -60,6 +61,11 @@ fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<Strin
 		cn = format!("{cn} {s}");
 	}
 	
+	if data.backgroundPath.is_empty()
+	{
+		cn = format!("{cn} noBackground");
+	}
+	
 	let target = match data.target.is_empty()
 	{
 		true => "_blank",
@@ -78,23 +84,30 @@ fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<Strin
 			h1 { "{data.label}" }
 			p { "{data.description}" }
 			
-			if data.backgroundIsVideo
+			if !data.backgroundPath.is_empty()
 			{
-				rsx!(video
+				if data.backgroundIsVideo
 				{
-					autoplay: true,
-					controls: false,
-					r#loop: true,
-					muted: true,
-					playsinline: true,
-					preload: true,
-					poster: "{data.backgroundPoster}",
-					src: "{data.backgroundPath}"
-				})
+					rsx!(video
+					{
+						autoplay: true,
+						controls: false,
+						r#loop: true,
+						muted: true,
+						playsinline: true,
+						preload: true,
+						poster: "{data.backgroundPoster}",
+						src: "{data.backgroundPath}"
+					})
+				}
+				else
+				{
+					rsx!(img { src: "{data.backgroundPath}" })
+				}
 			}
 			else
 			{
-				rsx!(img { src: "{data.backgroundPath}" })
+				rsx!(RainBackground {})
 			}
 		}
 	});
