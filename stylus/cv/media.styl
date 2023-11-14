@@ -1,3 +1,47 @@
+@media (min-width: 600px) and (max-width: 1199px)
+	#main
+		& .cv
+			width 85%
+			
+			& .summary
+				& .skillList
+					font-size .9rem
+			
+			& .portfolio
+				& .project
+					& > div
+						& h3, & h4 > a
+							line-height 25px
+			
+			& .workExperience
+				& .job
+					& > div
+						& .right
+							font-size .8rem
+							line-height 25px
+
+@media (max-width: 599px)
+	#main
+		& .cv
+			width 90%
+			
+			& .summary
+				& .skillList
+					font-size .7rem
+			
+			& .portfolio
+				& .project
+					& > div
+						& h3, & h4 > a
+							line-height 20px
+			
+			& .workExperience
+				& .job
+					& > div
+						& .right
+							font-size .6rem
+							line-height 20px
+
 @media print
 	#main
 		& .cv
