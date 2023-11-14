@@ -1,0 +1,59 @@
+@media (max-width: 599px)
+	baseSize = .8rem
+	contentSize = 1rem
+	headerSize = 1.8rem
+	
+	body
+		font-size baseSize
+		
+		& #main
+			& header.content
+				& h1
+					font-size headerSize
+				
+				& h4
+					font-size contentSize
+				
+				& #socialLinks
+					max-width 100%
+				
+				& #mainNav
+					display none
+			
+			& #projectListContainer
+				margin-top 125px
+				
+				& .project
+					left 2.5%
+					min-width 95%
+					max-width 95%
+					
+					&.show
+						&.previous
+							left -101%
+							
+							&.offscreen
+								left -178%
+						
+						&.next
+							left 101%
+							
+							&.offscreen
+								left 196%
+					
+					& h1
+						font-size headerSize
+					
+					& p
+						font-size contentSize
+						max-width 85%
+			
+			& #bodyContent
+				max-width 90%
+				
+				& section
+					& h1
+						font-size headerSize
+					
+					&a, & p, & ul
+						font-size contentSize

@@ -1,0 +1,45 @@
+@media (min-width: 600px) and (max-width: 1199px)
+	baseSize = 1rem
+	
+	body
+		font-size baseSize
+		
+		& #main
+			& header.content
+				& #socialLinks
+					max-width 75%
+				
+				& #mainNav
+					font-size baseSize
+					max-width 100%
+			
+			& #projectListContainer
+				margin-top 175px
+				
+				& .project
+					left 10%
+					min-width 80%
+					max-width 80%
+					
+					&.show
+						&.previous
+							left -72%
+							
+							&.offscreen
+								left -164%
+						
+						&.next
+							left 92%
+							
+							&.offscreen
+								left 174%
+					
+					& h1
+						font-size headerSize
+					
+					& p
+						font-size contentSize
+						max-width 85%
+			
+			& #bodyContent
+				max-width 90%
