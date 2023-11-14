@@ -155,8 +155,8 @@ fn WhoAmI(cx: Scope) -> Element
 			p
 			{
 				r#"The breadth of my experience has taught me an important lesson:
-				It is much more important to know how to find the answer than it
-				is to already know the answer. Instead of trying to keep all the
+				It is much more useful to know how to find the answer than it is
+				to already know the answer. Instead of trying to keep all the
 				documentation for every existing language, library, and tool in
 				my head all the time, I focus on knowing where to go looking
 				when I need information. This is why I say with confidence that
