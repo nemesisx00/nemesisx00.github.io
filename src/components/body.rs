@@ -2,7 +2,9 @@
 #![cfg_attr(debug_assertions, allow(dead_code))]
 
 use ::dioxus::prelude::*;
+use ::dioxus_router::prelude::Link;
 use crate::data::ContactEmail;
+use crate::components::route::Route;
 
 pub fn BodyContent(cx: Scope) -> Element
 {
@@ -58,16 +60,35 @@ fn Collaborate(cx: Scope, lookingForWork: bool) -> Element
 				r#"Let's have a conversation about your particular needs."#
 			}
 			
-			lookingForWork.then(move || rsx!(p
+			lookingForWork.then(move || rsx!
 			{
-				class: "lfw",
-				
-				r#"I am also currently looking for full time employment. If you
-				could use a seasoned, highly skilled, and adaptable software
-				developer, send me a description of the position you are looking
-				to fill. Note: I am only considering fully remote positions at
-				this time."#
-			}))
+				div
+				{
+					class: "lfw",
+					
+					p
+					{
+						r#"I am also currently looking for full time employment. If you
+						could use a seasoned, highly skilled, and adaptable software
+						developer, send me a description of the position you are looking
+						to fill."#
+					}
+					
+					p { "I am only considering fully remote positions at this time." }
+					
+					p
+					{
+						class: "center",
+						
+						Link
+						{
+							class: "button cv",
+							to: Route::Cv {},
+							"View Resume"
+						}
+					}
+				}
+			})
 			
 			p
 			{
