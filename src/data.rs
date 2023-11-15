@@ -5,7 +5,9 @@ pub const TitleContent: &'static str = "Peter Lunneberg";
 pub const SubtitleContent: &'static str = "Software Developer";
 pub const HeaderContent: &'static str = r#""#;
 
+pub const Name: &'static str = "Peter Lunneberg";
 pub const ContactEmail: &'static str = "plunn.collab@gmail.com";
+pub const Copywrite: &'static str = "© 2023";
 
 pub const GithubPageBaseUrl: &'static str = "https://nemesisx00.github.io";
 pub const GithubProfileUrl: &'static str = "https://github.com/nemesisx00";

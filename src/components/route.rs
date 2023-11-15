@@ -3,6 +3,7 @@
 
 use ::dioxus::prelude::*;
 use ::dioxus_router::prelude::*;
+use crate::data::{Copywrite, Name};
 use super::cv::CvPage;
 use super::head::PageHeader;
 use super::body::BodyContent;
@@ -25,7 +26,7 @@ pub fn Home(cx: Scope) -> Element
 		ProjectList {}
 		BodyContent {}
 		
-		footer { "© 2023 Peter Lunneberg" }
+		footer { format!("{} {}", Copywrite, Name) }
 	});
 }
 
@@ -36,6 +37,6 @@ pub fn Cv(cx: Scope) -> Element
 	{
 		CvPage {}
 		
-		footer { "© 2023 Peter Lunneberg" }
+		footer { format!("{} {}", Copywrite, Name) }
 	});
 }
