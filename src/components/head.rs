@@ -57,17 +57,18 @@ pub fn PageTitles(cx: Scope) -> Element
 	{
 		h1 { "{TitleContent}" }
 		h4 { "{SubtitleContent}" }
-		
-		h4
+		h5
 		{
-			id: "socialLinks",
-			
 			Link
 			{
 				class: "cv",
 				to: Route::Cv {},
-				"CV"
+				"View Resume"
 			}
+		}
+		h4
+		{
+			id: "socialLinks",
 			
 			a
 			{
