@@ -74,7 +74,7 @@ fn Collaborate(cx: Scope, lookingForWork: bool) -> Element
 						to fill."#
 					}
 					
-					p { "I am only considering fully remote positions at this time." }
+					//p { "I am only considering fully remote positions at this time." }
 					
 					p
 					{
