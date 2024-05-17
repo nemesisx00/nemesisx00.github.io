@@ -5,16 +5,12 @@ mod components;
 mod data;
 mod util;
 
+use ::dioxus::prelude::*;
+use ::tracing::Level;
 use crate::components::App;
 
 fn main()
 {
-	if cfg!(debug_assertions)
-	{
-		// init debug tool for WebAssembly
-		::wasm_logger::init(wasm_logger::Config::default());
-		::console_error_panic_hook::set_once();
-	}
-	
-	::dioxus_web::launch(App);
+	::dioxus_logger::init(Level::INFO).expect("failed to init logger");
+	launch(App);
 }

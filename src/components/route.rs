@@ -1,8 +1,4 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
-use ::dioxus_router::prelude::*;
 use crate::data::{Copywrite, Name};
 use super::cv::CvPage;
 use super::head::PageHeader;
@@ -18,25 +14,30 @@ pub enum Route
 	Cv {},
 }
 
-pub fn Home(cx: Scope) -> Element
+#[component]
+pub fn Home() -> Element
 {
-	return cx.render(rsx!
+	let footerText = format!("{} {}", Copywrite, Name);
+	
+	return rsx!
 	{
 		PageHeader {}
 		ProjectList {}
 		BodyContent {}
 		
-		footer { format!("{} {}", Copywrite, Name) }
-	});
+		footer { {footerText} }
+	};
 }
 
-#[inline_props]
-pub fn Cv(cx: Scope) -> Element
+#[component]
+pub fn Cv() -> Element
 {
-	return cx.render(rsx!
+	let footerText = format!("{} {}", Copywrite, Name);
+	
+	return rsx!
 	{
 		CvPage {}
 		
-		footer { format!("{} {}", Copywrite, Name) }
-	});
+		footer { {footerText} }
+	};
 }

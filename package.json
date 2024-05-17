@@ -10,6 +10,6 @@
 	"author": "Peter Lunneberg",
 	"license": "MIT",
 	"dependencies": {
-		"stylus": "^0.59.0"
+		"stylus": "^0.63.0"
 	}
 }

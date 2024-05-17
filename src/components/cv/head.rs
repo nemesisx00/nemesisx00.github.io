@@ -1,12 +1,8 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
-use ::dioxus_router::prelude::*;
-use crate::components::route::Route;
 use crate::data::{ContactEmail, GithubPageBaseUrl, TitleContent, SubtitleContent};
 
-pub fn Header(cx: Scope) -> Element
+#[component]
+pub fn Header() -> Element
 {
 	let name = TitleContent.to_owned();
 	let job = SubtitleContent.to_owned();
@@ -14,28 +10,30 @@ pub fn Header(cx: Scope) -> Element
 	let href = format!("mailto:{}", ContactEmail);
 	let urlLabel = GithubPageBaseUrl[8..].to_string();
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		header
 		{
 			h1 { "{name}" }
 			h3 { "{job}" }
-			h4
-			{
-				Link
-				{
-					to: Route::Home {},
-					"{urlLabel}"
-				}
-			}
+			
 			h4
 			{
 				a
 				{
-					href: "{href}",
-					"{email}"
+					href: "{GithubPageBaseUrl}",
+					{urlLabel}
+				}
+			}
+			
+			h4
+			{
+				a
+				{
+					href: href,
+					{email}
 				}
 			}
 		}
-	});
+	};
 }

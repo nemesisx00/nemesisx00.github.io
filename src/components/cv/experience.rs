@@ -1,14 +1,12 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
-use super::data::jobList;
+use super::data::{JobData, jobList};
 
-pub fn Experience(cx: Scope) -> Element
+#[component]
+pub fn Experience() -> Element
 {
 	let jobs = jobList();
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		section
 		{
@@ -18,14 +16,14 @@ pub fn Experience(cx: Scope) -> Element
 			
 			for (i, job) in jobs.iter().enumerate()
 			{
-				Job { key: "{i}", job: job.clone() }
+				Job { key: "{i}", id: i, job: job.clone() }
 			}
 		}
-	});
+	};
 }
 
-#[inline_props]
-fn Job(cx: Scope, job: JobData) -> Element
+#[component]
+fn Job(id: usize, job: JobData) -> Element
 {
 	let end = match &job.end
 	{
@@ -45,21 +43,11 @@ fn Job(cx: Scope, job: JobData) -> Element
 	{
 		if !line.is_empty()
 		{
-			match line.contains("•")
-			{
-				true => {
-					lines.push(rsx!(p
-					{
-						span {}
-						"{line}"
-					}));
-				},
-				false => lines.push(rsx!(p { "{line}" })),
-			}
+			lines.push(rsx!(p { {line} }));
 		}
 	}
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		div
 		{
@@ -71,36 +59,34 @@ fn Job(cx: Scope, job: JobData) -> Element
 				{
 					class: "left",
 					
-					h3 { "{job.company}" }
-					(!department.is_empty()).then(|| rsx!(h4 { "{department}" }))
-					h5 { "{job.location}" }
-					h4 { "{job.job}" }
+					h3 { {job.company} }
+					{!department.is_empty()}.then(|| rsx!(h4 { {department} }))
+					h5 { {job.location} }
+					h4 { {job.job} }
 				}
 				
 				div
 				{
 					class: "right",
 					
-					h3 { "{time}" }
+					h3 { {time} }
+				}
+			}
+			
+			div
+			{
+				class: "technologies",
+				
+				for tech in job.technologies
+				{
+					p { {tech} }
 				}
 			}
 			
 			for line in lines
 			{
-				line
+				{line}
 			}
 		}
-	});
-}
-
-#[derive(Clone, Debug, Default, PartialEq)]
-pub struct JobData
-{
-	pub company: String,
-	pub department: Option<String>,
-	pub location: String,
-	pub job: String,
-	pub start: String,
-	pub end: Option<String>,
-	pub text: String,
+	};
 }

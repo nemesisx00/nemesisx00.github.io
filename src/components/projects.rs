@@ -1,17 +1,15 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use std::collections::HashMap;
 use ::dioxus::prelude::*;
 use crate::data::{ProjectData, collectProjectData};
 use super::rain::RainBackground;
 
-pub fn ProjectList(cx: Scope) -> Element
+#[component]
+pub fn ProjectList() -> Element
 {
 	let projects = collectProjectData(false);
 	let classes = buildInitialClassMap(projects.clone());
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		div
 		{
@@ -27,7 +25,7 @@ pub fn ProjectList(cx: Scope) -> Element
 				}
 			}
 		}
-	});
+	};
 }
 
 fn buildInitialClassMap(projects: Vec<ProjectData>) -> HashMap<usize, Option<String>>
@@ -52,8 +50,8 @@ fn buildInitialClassMap(projects: Vec<ProjectData>) -> HashMap<usize, Option<Str
 
 // --------------------------------------------------
 
-#[inline_props]
-fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<String>) -> Element
+#[component]
+fn Project(data: ProjectData, #[props(!optional)] class: Option<String>) -> Element
 {
 	let mut cn = "project".to_string();
 	if let Some(s) = class
@@ -72,7 +70,7 @@ fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<Strin
 		false => data.target.as_str(),
 	};
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		a
 		{
@@ -88,7 +86,7 @@ fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<Strin
 			{
 				if data.backgroundIsVideo
 				{
-					rsx!(video
+					video
 					{
 						autoplay: true,
 						controls: false,
@@ -98,17 +96,17 @@ fn Project(cx: Scope, data: ProjectData, #[props(!optional)] class: Option<Strin
 						preload: true,
 						poster: "{data.backgroundPoster}",
 						src: "{data.backgroundPath}"
-					})
+					}
 				}
 				else
 				{
-					rsx!(img { src: "{data.backgroundPath}" })
+					img { src: "{data.backgroundPath}" }
 				}
 			}
 			else
 			{
-				rsx!(RainBackground {})
+				RainBackground {}
 			}
 		}
-	});
+	};
 }

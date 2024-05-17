@@ -1,8 +1,4 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
-use ::dioxus_router::prelude::*;
 use crate::data::{
 	GithubProfileUrl, KofiProfileUrl, LiberapayProfileUrl,
 	HeaderContent, SubtitleContent, TitleContent,
@@ -10,11 +6,12 @@ use crate::data::{
 };
 use super::route::Route;
 
-pub fn PageHeader(cx: Scope) -> Element
+#[component]
+pub fn PageHeader() -> Element
 {
 	let projects = collectProjectData(false);
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		header
 		{
@@ -28,7 +25,7 @@ pub fn PageHeader(cx: Scope) -> Element
 				
 				for (index, project) in projects.iter().enumerate()
 				{
-					(index > 0).then(|| rsx!(div { class: "navSpacer" }))
+					{index > 0}.then(|| rsx!(div { class: "navSpacer" }))
 					
 					a
 					{
@@ -40,20 +37,21 @@ pub fn PageHeader(cx: Scope) -> Element
 				}
 			}
 			
-			(!HeaderContent.is_empty()).then(|| rsx!(p { class: "headerContent", "{HeaderContent}" }))
+			{!HeaderContent.is_empty()}.then(|| rsx!(p { class: "headerContent", "{HeaderContent}" }))
 		}
-	});
+	};
 }
 
 // --------------------------------------------------
 
-pub fn PageTitles(cx: Scope) -> Element
+#[component]
+pub fn PageTitles() -> Element
 {
 	let githubUrl = GithubProfileUrl.to_owned();
 	let kofiUrl = KofiProfileUrl.to_owned();
 	let liberapayUrl = LiberapayProfileUrl.to_owned();
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		h1 { "{TitleContent}" }
 		h4 { "{SubtitleContent}" }
@@ -110,5 +108,5 @@ pub fn PageTitles(cx: Scope) -> Element
 				}
 			}
 		}
-	});
+	};
 }

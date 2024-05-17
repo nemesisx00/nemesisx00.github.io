@@ -1,20 +1,25 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
-use super::data::{UniversityDegree, UniversityGraduated, UniversityName};
+use super::data::{UniversityDegree, UniversityGraduated, UniversityLocation, UniversityMajor, UniversityMinor, UniversityName};
 
-pub fn Education(cx: Scope) -> Element
+#[component]
+pub fn Education() -> Element
 {
-	return cx.render(rsx!
+	return rsx!
 	{
 		section
 		{
 			class: "education",
 			
-			h2 { "{UniversityDegree}" }
-			h3 { "{UniversityName}" }
-			h4 { "Graduated {UniversityGraduated}" }
+			h1 { "Education" }
+			
+			div
+			{
+				h3 { "{UniversityDegree} in {UniversityMajor}" }
+				h3 { "{UniversityName}" }
+				h4 { "{UniversityLocation}" }
+				h4 { "Minor in {UniversityMinor}" }
+				h4 { "Graduated {UniversityGraduated}" }
+			}
 		}
-	});
+	};
 }

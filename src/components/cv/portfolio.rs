@@ -1,15 +1,12 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
 use crate::data::{ProjectData, collectProjectData, pageUrl};
 
-
-pub fn Portfolio(cx: Scope) -> Element
+#[component]
+pub fn Portfolio() -> Element
 {
 	let projects = collectProjectData(true);
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		section
 		{
@@ -22,11 +19,11 @@ pub fn Portfolio(cx: Scope) -> Element
 				Project { project: project.to_owned() }
 			}
 		}
-	});
+	};
 }
 
-#[inline_props]
-fn Project(cx: Scope, project: ProjectData) -> Element
+#[component]
+fn Project(project: ProjectData) -> Element
 {
 	let label = match project.title.is_empty()
 	{
@@ -46,7 +43,7 @@ fn Project(cx: Scope, project: ProjectData) -> Element
 		false => project.url.to_owned(),
 	};
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		div
 		{
@@ -68,5 +65,5 @@ fn Project(cx: Scope, project: ProjectData) -> Element
 			
 			p { "{description}" }
 		}
-	});
+	};
 }

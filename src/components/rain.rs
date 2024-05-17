@@ -1,16 +1,14 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
 use ::rand::random;
 use crate::data::{RainDropDensityMax, RainDropDensityMin};
 use crate::util::rangeRandom;
 
-pub fn RainBackground(cx: Scope) -> Element
+#[component]
+pub fn RainBackground() -> Element
 {
 	let density = rangeRandom(RainDropDensityMin as f64, RainDropDensityMax as f64) as usize;
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		div
 		{
@@ -21,17 +19,18 @@ pub fn RainBackground(cx: Scope) -> Element
 				RainDrop { key: "{i}" }
 			}
 		}
-	});
+	};
 }
 
 const RainDropPath: &str = "M 2.5,0 C 2.6949458,3.5392017 3.344765,20.524571 4.4494577,30.9559 5.7551357,42.666753 4.5915685,50 2.5,50 0.40843152,50 -0.75513565,42.666753 0.55054234,30.9559 1.655235,20.524571 2.3050542,3.5392017 2.5,0 Z";
 
-fn RainDrop(cx: Scope) -> Element
+#[component]
+fn RainDrop() -> Element
 {
 	let data = RainDropData::random();
 	let styles = data.toCss();
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		svg
 		{
@@ -43,7 +42,7 @@ fn RainDrop(cx: Scope) -> Element
 				d: "{RainDropPath}",
 			}
 		}
-	});
+	};
 }
 
 #[derive(Clone, Copy, Debug, Default, PartialEq)]

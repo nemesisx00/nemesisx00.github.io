@@ -1,14 +1,11 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
-use ::dioxus_router::prelude::Link;
 use crate::data::ContactEmail;
 use crate::components::route::Route;
 
-pub fn BodyContent(cx: Scope) -> Element
+#[component]
+pub fn BodyContent() -> Element
 {
-	return cx.render(rsx!
+	return rsx!
 	{
 		div
 		{
@@ -20,7 +17,7 @@ pub fn BodyContent(cx: Scope) -> Element
 			hr {}
 			Collaborate { lookingForWork: true }
 		}
-	});
+	};
 }
 
 // --------------------------------------------------
@@ -28,12 +25,12 @@ pub fn BodyContent(cx: Scope) -> Element
 /**
 Call to action.
 */
-#[inline_props]
-fn Collaborate(cx: Scope, lookingForWork: bool) -> Element
+#[component]
+fn Collaborate(lookingForWork: bool) -> Element
 {
 	let emailHref = format!("mailto:{}", ContactEmail);
 	
-	return cx.render(rsx!
+	return rsx!
 	{
 		section
 		{
@@ -60,7 +57,7 @@ fn Collaborate(cx: Scope, lookingForWork: bool) -> Element
 				r#"Let's have a conversation about your particular needs."#
 			}
 			
-			lookingForWork.then(move || rsx!
+			{lookingForWork}.then(move || rsx!
 			{
 				div
 				{
@@ -102,15 +99,16 @@ fn Collaborate(cx: Scope, lookingForWork: bool) -> Element
 				"Reach Out"
 			}
 		}
-	});
+	};
 }
 
 /**
 Why should you listen to me?
 */
-fn Credentials(cx: Scope) -> Element
+#[component]
+fn Credentials() -> Element
 {
-	return cx.render(rsx!
+	return rsx!
 	{
 		section
 		{
@@ -145,15 +143,16 @@ fn Credentials(cx: Scope) -> Element
 				software developer."#
 			}
 		}
-	});
+	};
 }
 
 /**
 Personal description: education/work history/interests/etc.
 */
-fn WhoAmI(cx: Scope) -> Element
+#[component]
+fn WhoAmI() -> Element
 {
-	return cx.render(rsx!
+	return rsx!
 	{
 		section
 		{
@@ -206,5 +205,5 @@ fn WhoAmI(cx: Scope) -> Element
 				in the near future."#
 			}
 		}
-	});
+	};
 }

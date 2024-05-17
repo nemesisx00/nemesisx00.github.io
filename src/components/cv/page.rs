@@ -1,16 +1,15 @@
-#![allow(non_snake_case, non_upper_case_globals)]
-#![cfg_attr(debug_assertions, allow(dead_code))]
-
 use ::dioxus::prelude::*;
 use super::head::Header;
 use super::summary::Summary;
 use super::education::Education;
 use super::experience::Experience;
 use super::portfolio::Portfolio;
+use super::skill::Skills;
 
-pub fn CvPage(cx: Scope) -> Element
+#[component]
+pub fn CvPage() -> Element
 {
-	return cx.render(rsx!
+	return rsx!
 	{
 		div
 		{
@@ -24,7 +23,9 @@ pub fn CvPage(cx: Scope) -> Element
 			hr {}
 			Experience {}
 			hr {}
+			Skills {}
+			hr {}
 			Education {}
 		}
-	});
+	};
 }
