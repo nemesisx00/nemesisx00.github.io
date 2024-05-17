@@ -8,7 +8,7 @@ pub const UniversityMajor: &'static str = "Computer Science";
 pub const UniversityMinor: &'static str = "Mathematics";
 
 pub const SummaryText: &'static str = r#"I am a professional software developer with over a decade of experience designing, developing, and maintaining applications across a variety of technologies.
-Furthermore, I excel at client interaction, learning new techniques, and problem solving."#;
+In addition, I excel at client interaction, learning new techniques, and problem solving."#;
 
 pub const SummaryTextNorsk: &'static str = r#"Jeg er en profesjonell programvareutvikler med mer enn 10 års erfaring på tvers av en rekke teknologier.
 Dessuten utmerker jeg meg på klientinteraksjon, læring av nye teknologier og problemløsning."#;
