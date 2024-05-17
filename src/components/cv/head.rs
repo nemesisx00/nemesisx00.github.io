@@ -1,5 +1,6 @@
 use ::dioxus::prelude::*;
-use crate::data::{ContactEmail, GithubPageBaseUrl, TitleContent, SubtitleContent};
+use crate::components::route::Route;
+use crate::data::{ContactEmail, GithubPageBaseUrl, SubtitleContent, TitleContent};
 
 #[component]
 pub fn Header() -> Element
@@ -19,9 +20,9 @@ pub fn Header() -> Element
 			
 			h4
 			{
-				a
+				Link
 				{
-					href: "{GithubPageBaseUrl}",
+					to: Route::Home {},
 					{urlLabel}
 				}
 			}
