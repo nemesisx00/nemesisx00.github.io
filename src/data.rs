@@ -38,25 +38,29 @@ sheets. It is built using Godot Engine with scripts written in C#."#.into(),
 		
 		ProjectData
 		{
-			description: "A library for parsing Infinity Engine game files written in Rust.".into(),
-			extended: r#"Infinity Engine Parser is a free, open source library
-written in Rust for parsing Infinity Engine game files. It is configured to
-provide a Foreign Function Interface (FFI), via the safer-ffi crate, enabling
-cross-language integration with other applications and libraries."#.into(),
+			description: "A desktop application for archiving and viewing game achievements data.".into(),
+			extended: r#"Local Achievements is a free, open source, cross-platform
+			desktop application for archiving game achievements data from multiple
+			different platforms and provides the ability to view the data offline.
+			It is written entirely in Rust and utilizes the Freya GUI library."#.into(),
 			id: "2".into(),
-			label: "Infinity Engine Parser".into(),
+			label: "Local Achievements".into(),
 			target: "_blank".into(),
-			url: projectUrl("/infinity-engine-parser"),
+			url: projectUrl("/local-achievements"),
 			..Default::default()
 		},
 		
 		ProjectData
 		{
-			description: "A desktop GUI frontend for yt-dlp written in Rust using Dioxus.".into(),
+			description: "A library for parsing Infinity Engine game files written in Rust.".into(),
+			extended: r#"Infinity Engine Parser is a free, open source library
+written in Rust for parsing Infinity Engine game files. It is configured to
+provide a Foreign Function Interface (FFI), via the safer-ffi crate, enabling
+cross-language integration with other applications and libraries."#.into(),
 			id: "3".into(),
-			label: "Rust VDL".into(),
+			label: "Infinity Engine Parser".into(),
 			target: "_blank".into(),
-			url: projectUrl("/rust-vdl"),
+			url: projectUrl("/infinity-engine-parser"),
 			..Default::default()
 		},
 		
