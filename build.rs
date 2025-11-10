@@ -27,6 +27,6 @@ fn main()
 	println!("cargo:rerun-if-changed=stylus/**/*.styl");
 	
 	//Rebuild on Nova's Run update
-	["public/**/*.*", "src/**/*.*", "next.config.js", "package.json", "tsconfig.json"]
+	_ = ["public/**/*.*", "src/**/*.*", "next.config.js", "package.json", "tsconfig.json"]
 		.map(|frag| println!("cargo:rerun-if-changed=subprojects/novas-run/{}", frag));
 }

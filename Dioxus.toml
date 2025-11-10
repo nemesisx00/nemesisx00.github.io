@@ -1,11 +1,16 @@
 [application]
-name = "nemesisx00-github-io"
-default_platform = "web"
-out_dir = "web"
 asset_dir = "assets"
+default_platform = "web"
+name = "nemesisx00-github-io"
+out_dir = ""
+
+[bundle]
+copyright = "Copyright 2023 Peter Lunneberg"
+identifier = "io.github.nemesisx00"
+publisher = "Peter Lunneberg"
 
 [web.app]
-title = ""
+title = "Peter Lunneberg - Software Developer"
 
 [web.watcher]
 index_on_404 = true
@@ -15,3 +20,6 @@ watch_path = ["src", "assets"]
 [web.resource]
 
 [web.resource.dev]
+
+[web.wasm_opt]
+level = "z"

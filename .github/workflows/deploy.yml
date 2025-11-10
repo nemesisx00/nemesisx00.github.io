@@ -42,11 +42,11 @@ jobs:
       - name: Build
         run: |
           npm install
-          dx build --release
+          dx bundle --release
       
       - name: Add Fallback File
         run: |
-          cp '${{github.workspace}}/web/index.html' '${{github.workspace}}/web/404.html'
+          cp '${{github.workspace}}/public/index.html' '${{github.workspace}}/public/404.html'
       
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -54,7 +54,7 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: '${{github.workspace}}/web'
+          path: '${{github.workspace}}/public'
       
       - name: Deploy to GitHub Pages
         id: deployment

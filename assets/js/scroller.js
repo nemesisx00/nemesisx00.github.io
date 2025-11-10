@@ -5,13 +5,11 @@ const autoScrollDelay = 5000
 const projectsSelector = '#projectListContainer .project'
 
 let projectsScrollTimer = null
-document.addEventListener('DOMContentLoaded', () => {
-	updateSelectedProject(1)
-	
-	if(projectsScrollTimer)
-		clearInterval(projectsScrollTimer)
-	projectsScrollTimer = setInterval(() => updateSelectedProject(getNextProjectIndex()), autoScrollDelay)
-})
+updateSelectedProject(0)
+
+if(projectsScrollTimer)
+	clearInterval(projectsScrollTimer)
+projectsScrollTimer = setInterval(() => updateSelectedProject(getNextProjectIndex()), autoScrollDelay)
 
 function getNextProjectIndex()
 {
@@ -31,6 +29,7 @@ function getNextProjectIndex()
 
 function updateSelectedProject(target)
 {
+	console.log("Am I even running?")
 	let projects = document.querySelectorAll(projectsSelector)
 	let [previous, current, next] = determineIndices(target, projects.length)
 	

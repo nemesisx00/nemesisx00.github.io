@@ -59,7 +59,7 @@ fn Project(data: ProjectData, #[props(!optional)] class: Option<String>) -> Elem
 		cn = format!("{cn} {s}");
 	}
 	
-	if data.backgroundPath.is_empty()
+	if data.background.is_none()
 	{
 		cn = format!("{cn} noBackground");
 	}
@@ -82,7 +82,7 @@ fn Project(data: ProjectData, #[props(!optional)] class: Option<String>) -> Elem
 			h1 { "{data.label}" }
 			p { "{data.description}" }
 			
-			if !data.backgroundPath.is_empty()
+			if data.background.is_some()
 			{
 				if data.backgroundIsVideo
 				{
@@ -94,13 +94,13 @@ fn Project(data: ProjectData, #[props(!optional)] class: Option<String>) -> Elem
 						muted: true,
 						playsinline: true,
 						preload: true,
-						poster: "{data.backgroundPoster}",
-						src: "{data.backgroundPath}"
+						poster: data.backgroundPoster.unwrap(),
+						src: data.background.unwrap()
 					}
 				}
 				else
 				{
-					img { src: "{data.backgroundPath}" }
+					img { src: data.background.unwrap() }
 				}
 			}
 			else

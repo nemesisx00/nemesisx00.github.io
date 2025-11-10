@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 	assetPrefix: './',
-	distDir: '../../web/novas-run',
+	distDir: '../../public/novas-run',
 	output: 'export',
 }
 

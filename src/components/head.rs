@@ -6,6 +6,9 @@ use crate::data::{
 };
 use super::route::Route;
 
+static GithubMarkWhite: Asset = asset!("/assets/images/third-party/github-mark/github-mark-white.svg");
+static KofiLogoSmol: Asset = asset!("/assets/images/third-party/kofi-logo-smol.png");
+
 #[component]
 pub fn PageHeader() -> Element
 {
@@ -77,7 +80,7 @@ pub fn PageTitles() -> Element
 				img
 				{
 					alt: "Github",
-					src: "./images/third-party/github-mark/github-mark-white.svg"
+					src: GithubMarkWhite
 				}
 			}
 			
@@ -90,7 +93,7 @@ pub fn PageTitles() -> Element
 				img
 				{
 					alt: "Ko-fi",
-					src: "./images/third-party/kofi-logo-smol.png"
+					src: KofiLogoSmol
 				}
 			}
 			

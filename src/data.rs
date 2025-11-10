@@ -1,3 +1,5 @@
+use dioxus::prelude::{Asset, asset};
+
 pub const TitleContent: &'static str = "Peter Lunneberg";
 pub const SubtitleContent: &'static str = "Software Developer";
 pub const HeaderContent: &'static str = r#""#;
@@ -14,20 +16,26 @@ pub const LiberapayProfileUrl: &'static str = "https://liberapay.com/plunn.dev/"
 pub const RainDropDensityMax: usize = 500;
 pub const RainDropDensityMin: usize = 50;
 
+static DiceRollerGodot20SecLoop: Asset = asset!("assets/video/dice-roller-godot-20sec-loop.webm");
+static DiceRollerGodotPoster: Asset = asset!("assets/images/dice-roller-godot-poster.png");
+static NovasRunTeaser: Asset = asset!("assets/video/novas-run-teaser.webm");
+static NovasRunTeaserPoster: Asset = asset!("assets/images/novas-run-teaser-poster.png");
+static OcsmPromoZoom: Asset = asset!("assets/images/ocsm-promo-zoom.png");
+
 pub fn pageUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubPageBaseUrl.to_owned()); }
 pub fn projectUrl(fragment: &str) -> String { return format!("{}{fragment}", GithubProfileUrl.to_owned()); }
 
-pub fn collectProjectData(cv: bool) -> Vec<ProjectData>
+pub fn collectProjectData(_cv: bool) -> Vec<ProjectData>
 {
-	let mut projects = vec![
+	let projects = vec![
 		ProjectData
 		{
 			backgroundIsVideo: false,
-			backgroundPath: "./images/ocsm-promo-zoom.png".into(),
+			background: Some(OcsmPromoZoom),
 			description: "An open source cross-platform desktop application for conveniently managing TTRPG character sheets.".into(),
 			extended: r#"Open Character Sheet Manager is a free, open source,
 cross-platform desktop application for conveniently managing TTRPG character
-sheets. It is built using Godot Engine with scripts written in C#."#.into(),
+sheets. It is written in Rust and uses Freya to draw the GUI."#.into(),
 			id: "1".into(),
 			label: "OCSM".into(),
 			target: "_blank".into(),
@@ -80,8 +88,8 @@ from which to explore Game AI implementation."#.into(),
 		ProjectData
 		{
 			backgroundIsVideo: true,
-			backgroundPath: "./video/novas-run-teaser.webm".into(),
-			backgroundPoster: "./images/novas-run-teaser-poster.png".into(),
+			background: Some(NovasRunTeaser),
+			backgroundPoster: Some(NovasRunTeaserPoster),
 			description: "A web-based 2D platformer written with React/Next.js.".into(),
 			extended: r#"Nova's Run is a web-based 2D platformer written in
 Typescript using React and Next.js. The entirety of the game mechanics are custom
@@ -97,8 +105,8 @@ engine or library."#.into(),
 		ProjectData
 		{
 			backgroundIsVideo: true,
-			backgroundPath: "./video/dice-roller-godot-20sec-loop.webm".into(),
-			backgroundPoster: "./images/dice-roller-godot-poster.png".into(),
+			background: Some(DiceRollerGodot20SecLoop),
+			backgroundPoster: Some(DiceRollerGodotPoster),
 			description: "Exploring 3D physics with C++ and Godot 4 in a literal dice roller application.".into(),
 			extended: r#"Dice Roller (Godot) is a free, open source, literal
 dice rolling application I created in order to explore 3D physics in Godot
@@ -113,11 +121,6 @@ Its Github Pages page was created using Rust and Dioxus."#.into(),
 		},
 	];
 	
-	if cv
-	{
-		projects.remove(2);
-	}
-	
 	return projects;
 }
 
@@ -125,8 +128,8 @@ Its Github Pages page was created using Rust and Dioxus."#.into(),
 pub struct ProjectData
 {
 	pub backgroundIsVideo: bool,
-	pub backgroundPath: String,
-	pub backgroundPoster: String,
+	pub background: Option<Asset>,
+	pub backgroundPoster: Option<Asset>,
 	pub description: String,
 	pub extended: String,
 	pub id: String,
