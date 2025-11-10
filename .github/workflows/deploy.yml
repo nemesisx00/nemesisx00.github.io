@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v6
         with:
           node-version: '20.x'
       
@@ -33,7 +33,7 @@ jobs:
           cargo install dioxus-cli
       
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v5
       
       - name: Setup Subprojects
         run: |
@@ -49,13 +49,13 @@ jobs:
           cp '${{github.workspace}}/web/index.html' '${{github.workspace}}/web/404.html'
       
       - name: Setup Pages
-        uses: actions/configure-pages@v3
+        uses: actions/configure-pages@v5
       
       - name: Upload Artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v4
         with:
           path: '${{github.workspace}}/web'
       
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
